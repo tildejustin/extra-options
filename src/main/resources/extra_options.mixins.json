@@ -7,8 +7,7 @@
     "AbstractClientPlayerEntityMixin",
     "AccessibilityOptionsScreenMixin",
     "GameOptionsMixin",
-    "GameRendererMixin",
-    "SplashScreenMixin"
+    "GameRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
