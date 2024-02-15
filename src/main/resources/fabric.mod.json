@@ -1,26 +1,20 @@
 {
   "schemaVersion": 1,
-  "id": "extra_options",
-  "version": "1.0.0",
+  "id": "extra-options",
+  "version": "${version}",
   "name": "ExtraOptions",
   "description": "Adds the 1.17 options of a monochrome logo, reduced distortion effects and reduced fov effects",
   "authors": [
     "Void_X_Walker"
   ],
   "contact": {
-    "repo": "https://github.com/VoidXWalker/ExtraOptions"
+    "repo": "https://github.com/tildejustin/extra-options"
   },
-  "license": "All-Rights-Reserved",
-  "icon": "assets/modid/icon.png",
-
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "me.voidxwalker.options.extra.Main"
-    ]
-  },
+  "license": "MIT",
+  "icon": "assets/extra-options/icon.png",
+  "environment": "client",
   "mixins": [
-    "extra_options.mixins.json"
+    "extra-options.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.7.4"
