@@ -2,27 +2,30 @@ package me.voidxwalker.options.extra.mixin;
 
 import me.voidxwalker.options.extra.Option;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.options.*;
+import net.minecraft.client.gui.screen.options.AccessibilityScreen;
 import net.minecraft.client.gui.widget.*;
-import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 
 @Mixin(AccessibilityScreen.class)
-public class AccessibilityOptionsScreenMixin extends GameOptionsScreen {
+public class AccessibilityOptionsScreenMixin extends Screen {
     @Shadow
     @Mutable
     @Final
     private static net.minecraft.client.options.Option[] OPTIONS;
 
     static {
-        OPTIONS = new net.minecraft.client.options.Option[]{Option.NARRATOR, Option.SUBTITLES, Option.TEXT_BACKGROUND_OPACITY, Option.TEXT_BACKGROUND, Option.CHAT_OPACITY, Option.AUTO_JUMP, Option.SNEAK_TOGGLED, Option.SPRINT_TOGGLED, Option.extra_options_DISTORTION_EFFECT_SCALE, Option.extra_options_FOV_EFFECT_SCALE, Option.extra_options_MONOCHROME_LOGO};
+        OPTIONS = new net.minecraft.client.options.Option[]{net.minecraft.client.options.Option.NARRATOR, net.minecraft.client.options.Option.SUBTITLES, net.minecraft.client.options.Option.TEXT_BACKGROUND_OPACITY, net.minecraft.client.options.Option.TEXT_BACKGROUND, net.minecraft.client.options.Option.CHAT_OPACITY, net.minecraft.client.options.Option.AUTO_JUMP, Option.extra_options_DISTORTION_EFFECT_SCALE, Option.extra_options_FOV_EFFECT_SCALE, Option.extra_options_MONOCHROME_LOGO};
     }
 
-    public AccessibilityOptionsScreenMixin(Screen parent, GameOptions gameOptions, Text title) {
-        super(parent, gameOptions, title);
+    @Shadow
+    @Final
+    private Screen parent;
+
+    protected AccessibilityOptionsScreenMixin(Text title) {
+        super(title);
     }
 
     @Redirect(method = "init", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/options/AccessibilityScreen;addButton(Lnet/minecraft/client/gui/widget/AbstractButtonWidget;)Lnet/minecraft/client/gui/widget/AbstractButtonWidget;"))

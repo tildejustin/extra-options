@@ -17,10 +17,13 @@ public abstract class GameOptionsMixin implements GameOptionsAccess {
     @Shadow
     @Final
     private static Logger LOGGER;
+
     @Unique
     public boolean extra_options_monochromeLogo;
+
     @Unique
     public float extra_options_distortionEffectScale;
+
     @Unique
     public float extra_options_fovEffectScale;
 

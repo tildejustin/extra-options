@@ -26,8 +26,8 @@ public abstract class SplashScreenMixin extends Overlay {
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/Window;getScaledWidth()I", shift = At.Shift.AFTER, ordinal = 1))
     public void fill(int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        int i = this.client.getWindow().getScaledWidth();
-        int j = this.client.getWindow().getScaledHeight();
+        int i = this.client.window.getScaledWidth();
+        int j = this.client.window.getScaledHeight();
         fill(0, 0, i, j, extra_options_BRAND_ARGB.getAsInt());
     }
 }
