@@ -10,6 +10,10 @@
     "GameRendererMixin",
     "SplashScreenMixin"
   ],
+  "mixins": [
+    "EnderEyeItemMixin",
+    "ServerPlayerEntityMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
