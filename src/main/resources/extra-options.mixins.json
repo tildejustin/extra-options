@@ -9,6 +9,10 @@
     "GameOptionsMixin",
     "GameRendererMixin"
   ],
+  "mixins": [
+    "EnderEyeItemMixin",
+    "ServerPlayerEntityMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

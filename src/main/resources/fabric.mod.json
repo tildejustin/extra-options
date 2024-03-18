@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "extra-options",
   "version": "${version}",
-  "name": "Extra Options",
+  "name": "Extra Options Ranked",
   "description": "Backports the 1.16.2+ options of reduced distortion effects and reduced fov effects, along with options fine-tuning what those sliders affect",
   "authors": [
     {
