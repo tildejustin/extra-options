@@ -18,15 +18,21 @@ public class EyeOfEnderCache {
         thrownEyes.add(eye);
     }
 
-    // public static void clear() {
-    //     thrownEyes.clear();
-    // }
 
+    /**
+     * remove the eye entity from the list if:
+     * <ul>
+     * <li>if the player world is different then eye's world (change of dimension, save and quit)
+     * <li>if the eye entity has been removed from the world
+     * <li>if the chunk it's in isn't loaded or not ticking entities
+     * <ul>
+     *     <li>because the entity age wouldn't increment and the eye stays frozen
+     *
+     * @param player the local ticking server player
+     */
     public static void tick(ServerPlayerEntity player) {
-        // remove the eye entity from the list if it's been removed
-        // or the ticking world is a different instance (change of dimension, save and quit)
         thrownEyes.removeIf(eye -> {
-                    // very important check, if we join another world and don't do this check,
+                    // very important check, if we join another world and don't do this,
                     // trying to get chunks from that entity's world will deadlock
                     if (eye.world != player.world) {
                         return true;
@@ -34,7 +40,7 @@ public class EyeOfEnderCache {
 
                     Chunk chunk = eye.world.getChunk(eye.chunkX, eye.chunkZ, ChunkStatus.FULL, false);
                     return !eye.isAlive()
-                            || !(chunk instanceof WorldChunk) // implicit isLoaded check by implicit null check
+                            || !(chunk instanceof WorldChunk) // implicit Chunk#isLoaded check by implicit null check
                             || !((WorldChunk) chunk).getLevelType().isAfter(ChunkHolder.LevelType.ENTITY_TICKING);
                 }
         );
