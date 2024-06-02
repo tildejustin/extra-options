@@ -5,14 +5,33 @@
   "name": "ExtraOptions Ranked",
   "description": "Adds the 1.17 options of a monochrome logo, reduced distortion effects and reduced fov effects",
   "authors": [
-    "Void_X_Walker"
+    {
+      "name": "Void_X_Walker",
+      "contact": {
+        "homepage": "https://github.com/VoidXWalker"
+      }
+    }
+  ],
+  "contributors": [
+    {
+      "name": "tildejustin",
+      "contact": {
+        "homepage": "https://github.com/tildejustin"
+      }
+    }
   ],
   "contact": {
-    "repo": "https://github.com/tildejustin/extra-options"
+    "homepage": "https://github.com/tildejustin/extra-options",
+    "sources": "https://github.com/tildejustin/extra-options",
+    "issues": "https://github.com/tildejustin/extra-options/issues"
   },
   "license": "MIT",
-  "icon": "assets/extra-options/icon.png",
   "environment": "client",
+  "entrypoints": {
+    "client": [
+      "me.voidxwalker.options.extra.ExtraOptions::init"
+    ]
+  },
   "mixins": [
     "extra-options.mixins.json"
   ],

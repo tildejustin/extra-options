@@ -1,60 +1,62 @@
 plugins {
-	alias libs.plugins.fabric.loom
-	id "maven-publish"
+    alias libs.plugins.fabric.loom
+    id "maven-publish"
 }
 
 version = "$mod_version+$target_version"
 group = maven_group
 
 base {
-	archivesName = archives_name
+    archivesName = archives_name
 }
 
 repositories {
-	maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
-	maven { url "https://jitpack.io" }
+    maven { url "https://jitpack.io" }
 }
 
 loom {
-	decompilers {
-		vineflower {
-			options.putAll(["mark-corresponding-synthetics": "1", "ind": "    "])
-		}
-	}
-	mixin {
-		useLegacyMixinAp = false
-	}
+    decompilers {
+        vineflower {
+            options.putAll(["mark-corresponding-synthetics": "1", "indent-string": "    "])
+        }
+    }
+    mixin {
+        useLegacyMixinAp = false
+    }
 }
 
 dependencies {
-	minecraft libs.minecraft
-	mappings variantOf(libs.yarn.mappings) { classifier "v2" }
-	modImplementation libs.fabric.loader
-	vineflowerDecompilerClasspath libs.vineflower
+    minecraft libs.minecraft
+    mappings variantOf(libs.yarn.mappings) { classifier "v2" }
+    modImplementation libs.fabric.loader
+    vineflowerDecompilerClasspath libs.vineflower
 }
 
 processResources {
-	filesMatching "fabric.mod.json", {
-		expand "version": version
-	}
+    filesMatching "fabric.mod.json", {
+        expand "version": version
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.encoding = "UTF-8"
-	if (JavaVersion.current().isJava9Compatible()) it.options.release.set(8)
+    it.options.encoding = "UTF-8"
+    if (JavaVersion.current().isJava9Compatible()) {
+        it.options.release.set(8)
+    }
 }
 
 java {
-	sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+    withSourcesJar()
 }
 
 jar {
-	from "LICENSE"
+    from "LICENSE"
 }
 
 publishing {
-	publications.create("mavenJava", MavenPublication) {
-		from components.java
-	}
-	repositories {}
+    publications.create("mavenJava", MavenPublication) {
+        from components.java
+    }
+    repositories {}
 }

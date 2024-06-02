@@ -1,25 +1,29 @@
 package me.voidxwalker.options.extra.mixin;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.*;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.voidxwalker.options.extra.*;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 
+@Debug(export = true)
 @Mixin(GameRenderer.class)
-public class GameRendererMixin {
-    @Shadow
-    @Final
-    private MinecraftClient client;
-
-    @WrapOperation(method = "renderWorld", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;lerp(FFF)F", ordinal = 0))
-    public float extra_options_lerp(float delta, float start, float end, Operation<Float> original) {
+public abstract class GameRendererMixin {
+    @ModifyExpressionValue(method = "renderWorld", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;lerp(FFF)F"))
+    private float applyDistortionEffectScale(float original) {
         if (EyeOfEnderCache.shouldDisable()) {
-            return original.call(delta, start, end);
+            return original;
         }
-        // noinspection DataFlowIssue
-        return MathHelper.lerp(delta, this.client.player.lastNauseaStrength, this.client.player.nextNauseaStrength) * ((GameOptionsAccess) this.client.options).extra_options_getDistortionEffectScale() * ((GameOptionsAccess) this.client.options).extra_options_getDistortionEffectScale();
+        return original * ExtraOptions.getDistortionEffectScale() * ExtraOptions.getDistortionEffectScale();
+    }
+
+    // lerping the constant from 70 to 60 in the fraction is the same as lerping the whole fraction from 1 to 60 / 70
+    @ModifyConstant(method = "getFov", constant = @Constant(doubleValue = 60))
+    private double lerpFovChangeInWater(double original) {
+        if (ExtraOptions.affectWater && !EyeOfEnderCache.shouldDisable()) {
+            return MathHelper.lerp(ExtraOptions.getFovEffectScale(), 70, original);
+        }
+        return original;
     }
 }
