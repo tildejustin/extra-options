@@ -7,7 +7,6 @@ import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 
-@Debug(export = true)
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
     @ModifyExpressionValue(method = "renderWorld", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;lerp(FFF)F"))
@@ -18,7 +17,7 @@ public abstract class GameRendererMixin {
     // lerping the constant from 70 to 60 in the fraction is the same as lerping the whole fraction from 1 to 60 / 70
     @ModifyConstant(method = "getFov", constant = @Constant(doubleValue = 60))
     private double lerpFovChangeInWater(double original) {
-        if (ExtraOptions.affectWater) {
+        if (!ExtraOptions.affectWater) {
             return MathHelper.lerp(ExtraOptions.getFovEffectScale(), 70, original);
         }
         return original;

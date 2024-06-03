@@ -16,7 +16,7 @@ public class ExtraOptions {
     public static DoubleOption FOV_EFFECT_SCALE;
     public static BooleanOption AFFECT_BOW;
     public static boolean affectBow = true;
-    public static boolean affectWater = false;
+    public static boolean affectWater = true;
     private static float distortionEffectScale = 1;
     private static float fovEffectScale = 1;
 
@@ -34,7 +34,7 @@ public class ExtraOptions {
                 (options, option) -> {
                     double d = option.getRatio(option.get(options));
                     MutableText text = option.getDisplayPrefix();
-                    return d == 0.0 ? text.append(ScreenTexts.OFF) : text.append((int) (d * 100) + "%");
+                    return d == 0 ? text.append(ScreenTexts.OFF) : text.append((int) (d * 100) + "%");
                 }
         );
         FOV_EFFECT_SCALE = new DoubleOption(
@@ -44,7 +44,7 @@ public class ExtraOptions {
                 (options, option) -> {
                     double d = option.getRatio(option.get(options));
                     MutableText text = option.getDisplayPrefix();
-                    return d == 0.0 ? text.append(ScreenTexts.OFF) : text.append((int) (d * 100) + "%");
+                    return d == 0 ? text.append(ScreenTexts.OFF) : text.append((int) (d * 100) + "%");
                 }
         );
         AFFECT_BOW = new BooleanOption(
@@ -84,7 +84,7 @@ public class ExtraOptions {
             writer.write("fovEffectScale:" + fovEffectScale + "\n");
             writer.write("affectBow:" + affectBow + "\n");
             // semi-hidden option
-            if (affectWater) {
+            if (!affectWater) {
                 writer.write("affectWater:" + affectWater + "\n");
             }
         }
