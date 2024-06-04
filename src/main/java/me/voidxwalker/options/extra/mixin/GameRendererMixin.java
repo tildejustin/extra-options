@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.*;
 
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
-    @ModifyExpressionValue(method = "renderWorld", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;lerp(FFF)F"))
+    @ModifyExpressionValue(method = "applyCameraTransformations", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;lerp(FFF)F"))
     private float applyDistortionEffectScale(float original) {
         return original * ExtraOptions.getDistortionEffectScale() * ExtraOptions.getDistortionEffectScale();
     }

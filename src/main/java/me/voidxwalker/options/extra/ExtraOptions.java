@@ -31,7 +31,7 @@ public class ExtraOptions {
                 options -> (double) distortionEffectScale,
                 (options, value) -> distortionEffectScale = value.floatValue(),
                 (options, option) -> {
-                    double d = option.getRatio(option.get(options));
+                    double d = option.method_18611(option.get(options));
                     String text = option.getDisplayPrefix();
                     return d == 0 ? text + I18n.translate("options.off") : text + (int) (d * 100) + "%";
                 }
@@ -41,7 +41,7 @@ public class ExtraOptions {
                 options -> Math.pow(fovEffectScale, 2),
                 (options, value) -> fovEffectScale = (float) Math.sqrt(value),
                 (options, option) -> {
-                    double d = option.getRatio(option.get(options));
+                    double d = option.method_18611(option.get(options));
                     String text = option.getDisplayPrefix();
                     return d == 0 ? text + I18n.translate("options.off") : text + (int) (d * 100) + "%";
                 }
