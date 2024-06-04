@@ -1,5 +1,6 @@
 plugins {
     alias libs.plugins.fabric.loom
+    alias libs.plugins.legacy.looming
     id "maven-publish"
 }
 
@@ -27,7 +28,7 @@ loom {
 
 dependencies {
     minecraft libs.minecraft
-    mappings variantOf(libs.yarn.mappings) { classifier "v2" }
+    mappings legacy.yarn(libs.versions.minecraft.get(), libs.versions.yarn.build.get())
     modImplementation libs.fabric.loader
     vineflowerDecompilerClasspath libs.vineflower
 }

@@ -1,8 +1,7 @@
 package me.voidxwalker.options.extra;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.options.*;
-import net.minecraft.client.resource.language.I18n;
+import net.minecraft.client.option.GameOptions;
 import net.minecraft.util.math.MathHelper;
 
 import java.io.*;
@@ -11,13 +10,17 @@ import java.nio.file.*;
 
 public class ExtraOptions {
     private static final Path config = FabricLoader.getInstance().getConfigDir().resolve("extra-options.txt");
-    public static DoubleOption DISTORTION_EFFECT_SCALE;
-    public static DoubleOption FOV_EFFECT_SCALE;
-    public static BooleanOption DISABLE_BOW_FOV;
+    public static GameOptions.Option DISTORTION_EFFECT_SCALE;
+    public static GameOptions.Option FOV_EFFECT_SCALE;
+    public static GameOptions.Option DISABLE_BOW_FOV;
     public static boolean disableBowFOV = false;
     public static boolean affectWater = true;
-    private static float distortionEffectScale = 1;
-    private static float fovEffectScale = 1;
+    private static double distortionEffectScale = 1;
+    private static double fovEffectScale = 1;
+
+    static {
+        GameOptions.Option.values();
+    }
 
     public static void init() throws IOException {
         if (!Files.exists(config)) {
@@ -25,32 +28,6 @@ public class ExtraOptions {
             save();
         }
         load();
-
-        DISTORTION_EFFECT_SCALE = new DoubleOption(
-                /* "options.screenEffectScale" */ "Distortion Effects", 0, 1, 0,
-                options -> (double) distortionEffectScale,
-                (options, value) -> distortionEffectScale = value.floatValue(),
-                (options, option) -> {
-                    double d = option.method_18611(option.get(options));
-                    String text = option.getDisplayPrefix();
-                    return d == 0 ? text + I18n.translate("options.off") : text + (int) (d * 100) + "%";
-                }
-        );
-        FOV_EFFECT_SCALE = new DoubleOption(
-                /* "options.fovEffectScale" */ "FOV Effects", 0, 1, 0,
-                options -> Math.pow(fovEffectScale, 2),
-                (options, value) -> fovEffectScale = (float) Math.sqrt(value),
-                (options, option) -> {
-                    double d = option.method_18611(option.get(options));
-                    String text = option.getDisplayPrefix();
-                    return d == 0 ? text + I18n.translate("options.off") : text + (int) (d * 100) + "%";
-                }
-        );
-        DISABLE_BOW_FOV = new BooleanOption(
-                /* "extra-options.disableBowFOV" */ "Disable Bow FOV",
-                options -> disableBowFOV,
-                (options, value) -> disableBowFOV = value
-        );
     }
 
     public static void load() throws IOException {
@@ -89,19 +66,19 @@ public class ExtraOptions {
         }
     }
 
-    public static float getDistortionEffectScale() {
+    public static double getDistortionEffectScale() {
         return distortionEffectScale;
     }
 
-    public static void setDistortionEffectScale(float distortionEffectScale) {
+    public static void setDistortionEffectScale(double distortionEffectScale) {
         ExtraOptions.distortionEffectScale = MathHelper.clamp(distortionEffectScale, 0, 1);
     }
 
-    public static float getFovEffectScale() {
+    public static double getFovEffectScale() {
         return fovEffectScale;
     }
 
-    public static void setFovEffectScale(float fovEffectScale) {
+    public static void setFovEffectScale(double fovEffectScale) {
         ExtraOptions.fovEffectScale = MathHelper.clamp(fovEffectScale, 0, 1);
     }
 }

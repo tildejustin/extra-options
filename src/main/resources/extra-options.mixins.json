@@ -5,8 +5,9 @@
   "compatibilityLevel": "JAVA_8",
   "client": [
     "AbstractClientPlayerEntityMixin",
-    "AccessibilityScreenMixin",
+    "ChatOptionsScreenMixin",
     "GameOptionsMixin",
+    "GameOptionsMixin$OptionMixin",
     "GameRendererMixin"
   ],
   "injectors": {
