@@ -14,8 +14,8 @@ public class ExtraOptions {
     private static final Path config = FabricLoader.getInstance().getConfigDir().resolve("extra-options.txt");
     public static DoubleOption DISTORTION_EFFECT_SCALE;
     public static DoubleOption FOV_EFFECT_SCALE;
-    public static BooleanOption AFFECT_BOW;
-    public static boolean affectBow = true;
+    public static BooleanOption DISABLE_BOW_FOV;
+    public static boolean disableBowFOV = false;
     public static boolean affectWater = true;
     private static float distortionEffectScale = 1;
     private static float fovEffectScale = 1;
@@ -47,10 +47,10 @@ public class ExtraOptions {
                     return d == 0 ? text.append(ScreenTexts.OFF) : text.append((int) (d * 100) + "%");
                 }
         );
-        AFFECT_BOW = new BooleanOption(
-                /* "extraoptions.affectBow" */ "Affect Bow",
-                options -> affectBow,
-                (options, value) -> affectBow = value
+        DISABLE_BOW_FOV = new BooleanOption(
+                /* "extra-options.disableBowFOV" */ "Disable Bow FOV",
+                options -> disableBowFOV,
+                (options, value) -> disableBowFOV = value
         );
     }
 
@@ -67,8 +67,8 @@ public class ExtraOptions {
                     case "fovEffectScale":
                         setFovEffectScale(Float.parseFloat(value));
                         break;
-                    case "affectBow":
-                        affectBow = Boolean.parseBoolean(value);
+                    case "disableBowFOV":
+                        disableBowFOV = Boolean.parseBoolean(value);
                         break;
                     case "affectWater":
                         affectWater = Boolean.parseBoolean(value);
@@ -82,7 +82,7 @@ public class ExtraOptions {
         try (BufferedWriter writer = Files.newBufferedWriter(config, StandardCharsets.UTF_8)) {
             writer.write("distortionEffectScale:" + distortionEffectScale + "\n");
             writer.write("fovEffectScale:" + fovEffectScale + "\n");
-            writer.write("affectBow:" + affectBow + "\n");
+            writer.write("disableBowFOV:" + disableBowFOV + "\n");
             // semi-hidden option
             if (!affectWater) {
                 writer.write("affectWater:" + affectWater + "\n");

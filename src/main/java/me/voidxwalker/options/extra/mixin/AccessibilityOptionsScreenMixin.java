@@ -21,7 +21,7 @@ public abstract class AccessibilityOptionsScreenMixin {
         Option[] newOptions = Arrays.copyOf(OPTIONS, OPTIONS.length + 3);
         newOptions[newOptions.length - 3] = ExtraOptions.DISTORTION_EFFECT_SCALE;
         newOptions[newOptions.length - 2] = ExtraOptions.FOV_EFFECT_SCALE;
-        newOptions[newOptions.length - 1] = ExtraOptions.AFFECT_BOW;
+        newOptions[newOptions.length - 1] = ExtraOptions.DISABLE_BOW_FOV;
         OPTIONS = newOptions;
     }
 
