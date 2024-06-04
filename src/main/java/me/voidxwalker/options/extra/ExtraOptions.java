@@ -80,7 +80,7 @@ public class ExtraOptions {
 
     public static void save() throws IOException {
         try (BufferedWriter writer = Files.newBufferedWriter(config, StandardCharsets.UTF_8)) {
-            writer.write("distortionEffectScale:" + distortionEffectScale + "\n");
+            writer.write("screenEffectScale:" + distortionEffectScale + "\n");
             writer.write("fovEffectScale:" + fovEffectScale + "\n");
             writer.write("disableBowFOV:" + disableBowFOV + "\n");
             // semi-hidden option
