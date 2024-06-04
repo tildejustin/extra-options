@@ -1,7 +1,7 @@
 package me.voidxwalker.options.extra;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.option.GameOptions;
+import net.minecraft.client.option.*;
 import net.minecraft.util.math.MathHelper;
 
 import java.io.*;
@@ -10,16 +10,16 @@ import java.nio.file.*;
 
 public class ExtraOptions {
     private static final Path config = FabricLoader.getInstance().getConfigDir().resolve("extra-options.txt");
-    public static GameOptions.Option DISTORTION_EFFECT_SCALE;
-    public static GameOptions.Option FOV_EFFECT_SCALE;
-    public static GameOptions.Option DISABLE_BOW_FOV;
+    public static GameOption DISTORTION_EFFECT_SCALE;
+    public static GameOption FOV_EFFECT_SCALE;
+    public static GameOption DISABLE_BOW_FOV;
     public static boolean disableBowFOV = false;
     public static boolean affectWater = true;
     private static float distortionEffectScale = 1;
     private static float fovEffectScale = 1;
 
     static {
-        GameOptions.Option.values();
+        GameOption.values();
     }
 
     public static void init() throws IOException {

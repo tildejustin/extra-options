@@ -4,10 +4,10 @@
   "package": "me.voidxwalker.options.extra.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "AbstractClientPlayerEntityMixin",
     "ChatOptionsScreenMixin",
+    "ClientPlayerEntityMixin",
+    "GameOptionMixin",
     "GameOptionsMixin",
-    "GameOptionsMixin$OptionMixin",
     "GameRendererMixin"
   ],
   "injectors": {
