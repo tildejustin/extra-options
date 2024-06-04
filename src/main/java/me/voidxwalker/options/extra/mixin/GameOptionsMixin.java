@@ -18,10 +18,10 @@ public abstract class GameOptionsMixin {
         ExtraOptions.save();
     }
 
-    @Inject(method = "method_18257", at = @At("TAIL"))
-    private void setSliderOptions(GameOptions.Option option, double value, CallbackInfo ci) {
+    @Inject(method = "setValue", at = @At("TAIL"))
+    private void setSliderOptions(GameOptions.Option option, float value, CallbackInfo ci) {
         if (option == ExtraOptions.DISTORTION_EFFECT_SCALE) {
-            ExtraOptions.setDistortionEffectScale((float) value);
+            ExtraOptions.setDistortionEffectScale(value);
         }
 
         if (option == ExtraOptions.FOV_EFFECT_SCALE) {
@@ -29,8 +29,8 @@ public abstract class GameOptionsMixin {
         }
     }
 
-    @Inject(method = "method_18256", at = @At(value = "HEAD"), cancellable = true)
-    private void getSliderOptions(GameOptions.Option option, CallbackInfoReturnable<Double> cir) {
+    @Inject(method = "getIntValue", at = @At(value = "HEAD"), cancellable = true)
+    private void getSliderOptions(GameOptions.Option option, CallbackInfoReturnable<Float> cir) {
         if (option == ExtraOptions.DISTORTION_EFFECT_SCALE) {
             cir.setReturnValue(ExtraOptions.getDistortionEffectScale());
         }
@@ -40,13 +40,15 @@ public abstract class GameOptionsMixin {
         }
     }
 
-    @Inject(method = "method_18258", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/GameOptions;save()V"))
+    // should be setBooleanValue
+    @Inject(method = "getBooleanValue", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/GameOptions;save()V"))
     private void setBowFov(GameOptions.Option option, int integer, CallbackInfo ci) {
         if (option == ExtraOptions.DISABLE_BOW_FOV) {
             ExtraOptions.disableBowFOV = !ExtraOptions.disableBowFOV;
         }
     }
 
+    // should be getBooleanValue
     @Inject(method = "getIntVideoOptions", at = @At("HEAD"), cancellable = true)
     private void getBowFov(GameOptions.Option option, CallbackInfoReturnable<Boolean> cir) {
         if (option == ExtraOptions.DISABLE_BOW_FOV) {

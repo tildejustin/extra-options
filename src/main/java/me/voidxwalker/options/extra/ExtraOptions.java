@@ -15,8 +15,8 @@ public class ExtraOptions {
     public static GameOptions.Option DISABLE_BOW_FOV;
     public static boolean disableBowFOV = false;
     public static boolean affectWater = true;
-    private static double distortionEffectScale = 1;
-    private static double fovEffectScale = 1;
+    private static float distortionEffectScale = 1;
+    private static float fovEffectScale = 1;
 
     static {
         GameOptions.Option.values();
@@ -66,19 +66,19 @@ public class ExtraOptions {
         }
     }
 
-    public static double getDistortionEffectScale() {
+    public static float getDistortionEffectScale() {
         return distortionEffectScale;
     }
 
-    public static void setDistortionEffectScale(double distortionEffectScale) {
+    public static void setDistortionEffectScale(float distortionEffectScale) {
         ExtraOptions.distortionEffectScale = MathHelper.clamp(distortionEffectScale, 0, 1);
     }
 
-    public static double getFovEffectScale() {
+    public static float getFovEffectScale() {
         return fovEffectScale;
     }
 
-    public static void setFovEffectScale(double fovEffectScale) {
+    public static void setFovEffectScale(float fovEffectScale) {
         ExtraOptions.fovEffectScale = MathHelper.clamp(fovEffectScale, 0, 1);
     }
 }

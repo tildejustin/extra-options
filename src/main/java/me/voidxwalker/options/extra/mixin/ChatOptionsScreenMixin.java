@@ -26,7 +26,7 @@ public abstract class ChatOptionsScreenMixin {
         OPTIONS = newOptions;
     }
 
-    @ModifyArg(method = "init", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/options/ChatOptionsScreen$2;<init>(Lnet/minecraft/client/gui/screen/options/ChatOptionsScreen;IIILjava/lang/String;)V"), index = 3)
+    @ModifyArg(method = "init", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/ButtonWidget;<init>(IIILjava/lang/String;)V"), index = 2)
     private int moveDoneButtonDown(int original) {
         return original - 144 + (OPTIONS.length + 1) / 2 * (20 + 4);
     }
