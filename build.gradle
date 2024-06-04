@@ -21,6 +21,9 @@ loom {
             options.putAll(["mark-corresponding-synthetics": "1", "indent-string": "    "])
         }
     }
+    legacyLooming {
+        intermediaryVersion.set(2)
+    }
     mixin {
         useLegacyMixinAp = false
     }

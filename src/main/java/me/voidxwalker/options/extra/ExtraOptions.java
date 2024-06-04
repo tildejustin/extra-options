@@ -10,16 +10,16 @@ import java.nio.file.*;
 
 public class ExtraOptions {
     private static final Path config = FabricLoader.getInstance().getConfigDir().resolve("extra-options.txt");
-    public static GameOptions.Option DISTORTION_EFFECT_SCALE;
-    public static GameOptions.Option FOV_EFFECT_SCALE;
-    public static GameOptions.Option DISABLE_BOW_FOV;
+    public static GameOptions.class_316 DISTORTION_EFFECT_SCALE;
+    public static GameOptions.class_316 FOV_EFFECT_SCALE;
+    public static GameOptions.class_316 DISABLE_BOW_FOV;
     public static boolean disableBowFOV = false;
     public static boolean affectWater = true;
     private static float distortionEffectScale = 1;
     private static float fovEffectScale = 1;
 
     static {
-        GameOptions.Option.values();
+        GameOptions.class_316.values();
     }
 
     public static void init() throws IOException {

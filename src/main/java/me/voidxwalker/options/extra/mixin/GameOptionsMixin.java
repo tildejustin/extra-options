@@ -13,13 +13,13 @@ import java.util.*;
 
 @Mixin(GameOptions.class)
 public abstract class GameOptionsMixin {
-    @Inject(method = "save", at = @At("TAIL"))
+    @Inject(method = "write", at = @At("TAIL"))
     private void writeExtraOptions(CallbackInfo ci) throws IOException {
         ExtraOptions.save();
     }
 
-    @Inject(method = "setValue", at = @At("TAIL"))
-    private void setSliderOptions(GameOptions.Option option, float value, CallbackInfo ci) {
+    @Inject(method = "method_1625", at = @At("TAIL"))
+    private void setSliderOptions(GameOptions.class_316 option, float value, CallbackInfo ci) {
         if (option == ExtraOptions.DISTORTION_EFFECT_SCALE) {
             ExtraOptions.setDistortionEffectScale(value);
         }
@@ -29,8 +29,8 @@ public abstract class GameOptionsMixin {
         }
     }
 
-    @Inject(method = "getIntValue", at = @At(value = "HEAD"), cancellable = true)
-    private void getSliderOptions(GameOptions.Option option, CallbackInfoReturnable<Float> cir) {
+    @Inject(method = "method_1637", at = @At(value = "HEAD"), cancellable = true)
+    private void getSliderOptions(GameOptions.class_316 option, CallbackInfoReturnable<Float> cir) {
         if (option == ExtraOptions.DISTORTION_EFFECT_SCALE) {
             cir.setReturnValue(ExtraOptions.getDistortionEffectScale());
         }
@@ -41,44 +41,44 @@ public abstract class GameOptionsMixin {
     }
 
     // should be setBooleanValue
-    @Inject(method = "getBooleanValue", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/GameOptions;save()V"))
-    private void setBowFov(GameOptions.Option option, int integer, CallbackInfo ci) {
+    @Inject(method = "method_1629", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/GameOptions;write()V"))
+    private void setBowFov(GameOptions.class_316 option, int integer, CallbackInfo ci) {
         if (option == ExtraOptions.DISABLE_BOW_FOV) {
             ExtraOptions.disableBowFOV = !ExtraOptions.disableBowFOV;
         }
     }
 
     // should be getBooleanValue
-    @Inject(method = "getIntVideoOptions", at = @At("HEAD"), cancellable = true)
-    private void getBowFov(GameOptions.Option option, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "method_1628", at = @At("HEAD"), cancellable = true)
+    private void getBowFov(GameOptions.class_316 option, CallbackInfoReturnable<Boolean> cir) {
         if (option == ExtraOptions.DISABLE_BOW_FOV) {
             cir.setReturnValue(ExtraOptions.disableBowFOV);
         }
     }
 
-    @Mixin(GameOptions.Option.class)
+    @Mixin(GameOptions.class_316.class)
     public abstract static class OptionMixin {
         @Shadow(remap = false)
         @Final
         @Mutable
-        private static GameOptions.Option[] field_1001;
+        private static GameOptions.class_316[] field_1918;
 
         @Invoker("<init>")
-        private static GameOptions.Option newOption(String internalName, int ordinal, String name, boolean numeric, boolean booleanToggle) {
+        private static GameOptions.class_316 newOption(String internalName, int ordinal, String name, boolean numeric, boolean booleanToggle) {
             return null;
         }
 
-        @Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = Opcodes.PUTSTATIC, target = "Lnet/minecraft/client/option/GameOptions$Option;field_1001:[Lnet/minecraft/client/option/GameOptions$Option;", shift = At.Shift.AFTER))
+        @Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = Opcodes.PUTSTATIC, target = "Lnet/minecraft/client/option/GameOptions$class_316;field_1918:[Lnet/minecraft/client/option/GameOptions$class_316;", shift = At.Shift.AFTER))
         private static void addAccessibilityOptions(CallbackInfo ci) {
-            ArrayList<GameOptions.Option> options = new ArrayList<>(Arrays.asList(field_1001));
-            GameOptions.Option last = options.get(options.size() - 1);
+            ArrayList<GameOptions.class_316> options = new ArrayList<>(Arrays.asList(field_1918));
+            GameOptions.class_316 last = options.get(options.size() - 1);
             ExtraOptions.DISTORTION_EFFECT_SCALE = newOption("DISTORTION_EFFECT_SCALE", last.ordinal() + 1, /* "options.screenEffectScale" */ "Distortion Effects", true, false);
             ExtraOptions.FOV_EFFECT_SCALE = newOption("FOV_EFFECT_SCALE", last.ordinal() + 2, /* "options.fovEffectScale" */ "FOV Effects", true, false);
             ExtraOptions.DISABLE_BOW_FOV = newOption("DISABLE_BOW_FOV", last.ordinal() + 3, /* "extra-options.disableBowFOV" */ "Disable Bow FOV", false, true);
             options.add(ExtraOptions.DISTORTION_EFFECT_SCALE);
             options.add(ExtraOptions.FOV_EFFECT_SCALE);
             options.add(ExtraOptions.DISABLE_BOW_FOV);
-            field_1001 = options.toArray(new GameOptions.Option[0]);
+            field_1918 = options.toArray(new GameOptions.class_316[0]);
         }
     }
 }
