@@ -27,6 +27,12 @@ loom {
     runs.client.programArgs "--userProperties", "{}"
 }
 
+afterEvaluate {
+    tasks.named("genSourcesWithVineflower").configure {
+        useCache = false
+    }
+}
+
 dependencies {
     minecraft libs.minecraft
     mappings legacy.yarn(libs.versions.minecraft.get(), libs.versions.yarn.build.get())
