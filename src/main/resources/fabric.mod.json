@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "extra-options",
   "version": "${version}",
-  "name": "ExtraOptions",
+  "name": "Extra Options",
   "description": "Adds the 1.17 options of a monochrome logo, reduced distortion effects and reduced fov effects",
   "authors": [
     {
