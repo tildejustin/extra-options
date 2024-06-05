@@ -7,9 +7,7 @@ import org.spongepowered.asm.mixin.injection.*;
 
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
-    // in the bytecode, var7 is actually just reassigned var4 (FSTORE 4 for both)
-    // why the decompiler lies about this, I do not know
-    @ModifyVariable(method = "setupCamera", at = @At(value = "STORE", ordinal = 1), ordinal = 2)
+    @ModifyVariable(method = "setupCamera", at = @At(value = "STORE", ordinal = 0), ordinal = 2)
     private float applyDistortionEffectScale(float original) {
         return original * ExtraOptions.getDistortionEffectScale() * ExtraOptions.getDistortionEffectScale();
     }
