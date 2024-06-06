@@ -8,7 +8,8 @@
     "ChatOptionsScreenMixin",
     "GameOptionsMixin",
     "GameOptionsMixin$OptionMixin",
-    "GameRendererMixin"
+    "GameRendererMixin",
+    "ReflectorMixin"
   ],
   "injectors": {
     "defaultRequire": 1
