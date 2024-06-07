@@ -35,9 +35,4 @@ public abstract class ChatOptionsScreenMixin {
     private int moveDoneButtonDown(int original) {
         return original + (field_1062.length + 1) / 2 * (20 + 4);
     }
-
-    @ModifyConstant(method = "buttonClicked", constant = @Constant(intValue = 100))
-    private int tooManyOptions(int original) {
-        return original + 100;
-    }
 }
