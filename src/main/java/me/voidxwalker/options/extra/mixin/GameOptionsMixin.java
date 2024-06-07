@@ -22,7 +22,7 @@ public abstract class GameOptionsMixin {
         }
 
         if (option == ExtraOptions.FOV_EFFECT_SCALE) {
-            ExtraOptions.setFovEffectScale(value);
+            ExtraOptions.setFovEffectScale((float) Math.sqrt(value));
         }
     }
 
@@ -33,7 +33,7 @@ public abstract class GameOptionsMixin {
         }
 
         if (option == ExtraOptions.FOV_EFFECT_SCALE) {
-            cir.setReturnValue(ExtraOptions.getFovEffectScale());
+            cir.setReturnValue((float) Math.pow(ExtraOptions.getFovEffectScale(), 2));
         }
     }
 
