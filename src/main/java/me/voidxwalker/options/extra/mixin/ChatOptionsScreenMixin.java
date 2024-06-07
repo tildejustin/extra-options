@@ -2,7 +2,7 @@ package me.voidxwalker.options.extra.mixin;
 
 import me.voidxwalker.options.extra.ExtraOptions;
 import net.minecraft.client.gui.screen.options.ChatOptionsScreen;
-import net.minecraft.client.option.*;
+import net.minecraft.client.option.GameOption;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -27,7 +27,7 @@ public abstract class ChatOptionsScreenMixin {
     }
 
     @Dynamic
-    @ModifyConstant(method = "init", constant = {@Constant(intValue = 168)}, require = 1)
+    @ModifyConstant(method = "init", constant = @Constant(intValue = 168))
     private int useDynamicOffset(int original) {
         return 0;
     }
