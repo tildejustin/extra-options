@@ -18,6 +18,7 @@ public abstract class GameOptionMixin {
     @Mutable
     private static GameOption[] field_1001;
 
+    @SuppressWarnings({"JavaReflectionMemberAccess", "UnresolvedMixinReference"})
     @Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = Opcodes.PUTSTATIC, target = "Lnet/minecraft/client/option/GameOption;field_1001:[Lnet/minecraft/client/option/GameOption;", shift = At.Shift.AFTER))
     private static void addAccessibilityOptions(CallbackInfo ci) {
         ArrayList<GameOption> options = new ArrayList<>(Arrays.asList(field_1001));
@@ -25,9 +26,9 @@ public abstract class GameOptionMixin {
 
         boolean optifine = false;
         try {
-            Class.forName("Config");
+            GameOption.class.getDeclaredConstructor(String.class, int.class, String.class, boolean.class, boolean.class);
+        } catch (NoSuchMethodException ignored) {
             optifine = true;
-        } catch (ClassNotFoundException ignored) {
         }
 
         if (!optifine) {
