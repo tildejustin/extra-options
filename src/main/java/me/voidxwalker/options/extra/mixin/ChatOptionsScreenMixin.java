@@ -26,14 +26,8 @@ public abstract class ChatOptionsScreenMixin {
         field_1062 = newOptions;
     }
 
-    @Dynamic
-    @ModifyConstant(method = "init", constant = {@Constant(intValue = 168)}, require = 1)
-    private int useDynamicOffset(int original) {
-        return 0;
-    }
-
-    @ModifyArg(method = "init", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/ButtonWidget;<init>(IIILjava/lang/String;)V"), index = 2)
+    @ModifyArg(method = "method_21947", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/ButtonWidget;<init>(IIILjava/lang/String;)V"), index = 2)
     private int moveDoneButtonDown(int original) {
-        return original + (field_1062.length + 1) / 2 * (20 + 4) + 48;
+        return original + 24;
     }
 }
