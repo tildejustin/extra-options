@@ -1,0 +1,12 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "me.voidxwalker.options.extra.optifine",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "OptiFineGameOptionAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
