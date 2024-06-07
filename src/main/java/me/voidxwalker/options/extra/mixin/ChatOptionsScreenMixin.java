@@ -27,7 +27,7 @@ public abstract class ChatOptionsScreenMixin {
     }
 
     @Dynamic
-    @ModifyConstant(method = "init", constant = {@Constant(intValue = 168)}, require = 1)
+    @ModifyConstant(method = "init", constant = @Constant(intValue = 168))
     private int useDynamicOffset(int original) {
         return 0;
     }
