@@ -1,7 +1,7 @@
 package me.voidxwalker.options.extra;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.option.*;
+import net.minecraft.client.option.GameOption;
 import net.minecraft.util.math.MathHelper;
 
 import java.io.*;
