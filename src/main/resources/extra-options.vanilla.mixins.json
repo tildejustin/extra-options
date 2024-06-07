@@ -1,0 +1,12 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "me.voidxwalker.options.extra.vanilla",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "VanillaGameOptionAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
