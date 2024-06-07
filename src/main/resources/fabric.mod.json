@@ -33,9 +33,7 @@
     ]
   },
   "mixins": [
-    "extra-options.mixins.json",
-    "extra-options.vanilla.mixins.json",
-    "extra-options.optifine.mixins.json"
+    "extra-options.mixins.json"
   ],
   "depends": {
     "minecraft": ">1.5.2 <1.7",
