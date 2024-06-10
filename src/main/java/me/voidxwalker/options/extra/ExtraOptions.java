@@ -12,9 +12,10 @@ public class ExtraOptions {
     private static final Path config = FabricLoader.getInstance().getConfigDir().resolve("extra-options.txt");
     public static GameOptions.class_316 DISTORTION_EFFECT_SCALE;
     public static GameOptions.class_316 FOV_EFFECT_SCALE;
-    public static GameOptions.class_316 DISABLE_BOW_FOV;
-    public static boolean disableBowFOV = false;
-    public static boolean affectWater = true;
+    public static GameOptions.class_316 BOW_FOV_EFFECTS;
+    public static GameOptions.class_316 SUBMERGED_FOV_EFFECTS;
+    public static boolean bowFOVEffects = true;
+    public static boolean submergedFOVEffects = true;
     private static float distortionEffectScale = 1;
     private static float fovEffectScale = 1;
 
@@ -38,11 +39,11 @@ public class ExtraOptions {
                     case "fovEffectScale":
                         setFovEffectScale(Float.parseFloat(value));
                         break;
-                    case "disableBowFOV":
-                        disableBowFOV = Boolean.parseBoolean(value);
+                    case "bowFOVEffects":
+                        bowFOVEffects = Boolean.parseBoolean(value);
                         break;
-                    case "affectWater":
-                        affectWater = Boolean.parseBoolean(value);
+                    case "submergedFOVEffects":
+                        submergedFOVEffects = Boolean.parseBoolean(value);
                         break;
                 }
             });
@@ -56,11 +57,8 @@ public class ExtraOptions {
         try (BufferedWriter writer = Files.newBufferedWriter(config, StandardCharsets.UTF_8)) {
             writer.write("screenEffectScale:" + distortionEffectScale + "\n");
             writer.write("fovEffectScale:" + fovEffectScale + "\n");
-            writer.write("disableBowFOV:" + disableBowFOV + "\n");
-            // semi-hidden option
-            if (!affectWater) {
-                writer.write("affectWater:" + affectWater + "\n");
-            }
+            writer.write("bowFOVEffects:" + bowFOVEffects + "\n");
+            writer.write("submergedFOVEffects:" + submergedFOVEffects + "\n");
         }
     }
 
