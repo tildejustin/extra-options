@@ -18,7 +18,7 @@ public abstract class GameOptionMixin {
     @Mutable
     private static GameOption[] field_1001;
 
-    @SuppressWarnings({"JavaReflectionMemberAccess", "UnresolvedMixinReference"})
+    @SuppressWarnings({"JavaReflectionMemberAccess"})
     @Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = Opcodes.PUTSTATIC, target = "Lnet/minecraft/client/option/GameOption;field_1001:[Lnet/minecraft/client/option/GameOption;", shift = At.Shift.AFTER))
     private static void addAccessibilityOptions(CallbackInfo ci) {
         ArrayList<GameOption> options = new ArrayList<>(Arrays.asList(field_1001));
@@ -34,17 +34,20 @@ public abstract class GameOptionMixin {
         if (!optifine) {
             ExtraOptions.DISTORTION_EFFECT_SCALE = VanillaGameOptionAccessor.newOption("DISTORTION_EFFECT_SCALE", last.ordinal() + 1, /* "options.screenEffectScale" */ "Distortion Effects", true, false);
             ExtraOptions.FOV_EFFECT_SCALE = VanillaGameOptionAccessor.newOption("FOV_EFFECT_SCALE", last.ordinal() + 2, /* "options.fovEffectScale" */ "FOV Effects", true, false);
-            ExtraOptions.DISABLE_BOW_FOV = VanillaGameOptionAccessor.newOption("DISABLE_BOW_FOV", last.ordinal() + 3, /* "extra-options.disableBowFOV" */ "Disable Bow FOV", false, true);
+            ExtraOptions.BOW_FOV_EFFECTS = VanillaGameOptionAccessor.newOption("BOW_FOV_EFFECTS", last.ordinal() + 3, /* "extra-options.bowFOVEffects" */ "Bow FOV Effects", false, true);
+            ExtraOptions.SUBMERGED_FOV_EFFECTS = VanillaGameOptionAccessor.newOption("SUBMERGED_FOV_EFFECTS", last.ordinal() + 4, /* extra-options.submergedFOVEffects */ "Submerged FOV Effects", false, true);
         } else {
             ExtraOptions.DISTORTION_EFFECT_SCALE = OptiFineGameOptionAccessor.newOption("DISTORTION_EFFECT_SCALE", last.ordinal() + 1, "DISTORTION_EFFECT_SCALE", last.ordinal() + 1, "Distortion Effects", true, false);
             ExtraOptions.FOV_EFFECT_SCALE = OptiFineGameOptionAccessor.newOption("FOV_EFFECT_SCALE", last.ordinal() + 2, "FOV_EFFECT_SCALE", last.ordinal() + 2, "FOV Effects", true, false);
             // yes, the + 80 is intentional.
-            ExtraOptions.DISABLE_BOW_FOV = OptiFineGameOptionAccessor.newOption("DISABLE_BOW_FOV", last.ordinal() + 80, "DISABLE_BOW_FOV", last.ordinal() + 3, "Disable Bow FOV", false, true);
+            ExtraOptions.BOW_FOV_EFFECTS = OptiFineGameOptionAccessor.newOption("BOW_FOV_EFFECTS", last.ordinal() + 80, "BOW_FOV_EFFECTS", last.ordinal() + 3, "Bow FOV Effects", false, true);
+            ExtraOptions.SUBMERGED_FOV_EFFECTS = OptiFineGameOptionAccessor.newOption("SUBMERGED_FOV_EFFECTS", last.ordinal() + 81, "SUBMERGED_FOV_EFFECTS", last.ordinal() + 4, "Submerged FOV Effects", false, true);
         }
 
         options.add(ExtraOptions.DISTORTION_EFFECT_SCALE);
         options.add(ExtraOptions.FOV_EFFECT_SCALE);
-        options.add(ExtraOptions.DISABLE_BOW_FOV);
+        options.add(ExtraOptions.BOW_FOV_EFFECTS);
+        options.add(ExtraOptions.SUBMERGED_FOV_EFFECTS);
         field_1001 = options.toArray(new GameOption[0]);
     }
 }
