@@ -4,12 +4,14 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.voidxwalker.options.extra.ExtraOptions;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.util.math.MathHelper;
-import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
-    @ModifyExpressionValue(method = "renderWorld", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;lerp(FFF)F"))
+    // net.minecraft.class_757.method_3185 -> GameRenderer#applyCameraTransformations, 1.14.x
+    @Dynamic
+    @ModifyExpressionValue(method = {"renderWorld", "Lnet/minecraft/class_757;method_3185(F)V"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;lerp(FFF)F"), require = 1)
     private float applyDistortionEffectScale(float original) {
         return original * ExtraOptions.getDistortionEffectScale() * ExtraOptions.getDistortionEffectScale();
     }
