@@ -20,8 +20,8 @@ public abstract class AbstractClientPlayerEntityMixin extends PlayerEntity {
     // more targeted implementation that only ignores player speed's effect on fov but not bows or creative flight
     @ModifyExpressionValue(method = "getSpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;getAttributeValue(Lnet/minecraft/entity/attribute/EntityAttribute;)D"))
     private double applyFovEffectScaleSpeedOnly(double original) {
-        if (!ExtraOptions.disableBowFOV && !EyeOfEnderCache.shouldDisable()) {
-            return this.getAttributeBaseValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+        if (ExtraOptions.bowFOVEffects && !EyeOfEnderCache.shouldDisable()) {
+            return MathHelper.lerp(ExtraOptions.getFovEffectScale(), this.getAttributeBaseValue(EntityAttributes.GENERIC_MOVEMENT_SPEED), original);
         }
         return original;
     }
@@ -29,7 +29,7 @@ public abstract class AbstractClientPlayerEntityMixin extends PlayerEntity {
     // vanilla 1.16.2+ and motiono implementation
     @ModifyReturnValue(method = "getSpeed", at = @At("RETURN"))
     public float applyFovEffectScale(float original) {
-        if (ExtraOptions.disableBowFOV && !EyeOfEnderCache.shouldDisable()) {
+        if (!ExtraOptions.bowFOVEffects && !EyeOfEnderCache.shouldDisable()) {
             return MathHelper.lerp(ExtraOptions.getFovEffectScale(), 1, original);
         }
         return original;
