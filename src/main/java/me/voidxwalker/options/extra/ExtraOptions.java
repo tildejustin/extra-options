@@ -21,7 +21,6 @@ public class ExtraOptions {
 
     public static void init() throws IOException {
         if (!Files.exists(config)) {
-            Files.createFile(config);
             save();
         }
         load();
@@ -75,6 +74,9 @@ public class ExtraOptions {
     }
 
     public static void save() throws IOException {
+        if (Files.notExists(config)) {
+            Files.createFile(config);
+        }
         try (BufferedWriter writer = Files.newBufferedWriter(config, StandardCharsets.UTF_8)) {
             writer.write("screenEffectScale:" + distortionEffectScale + "\n");
             writer.write("fovEffectScale:" + fovEffectScale + "\n");
