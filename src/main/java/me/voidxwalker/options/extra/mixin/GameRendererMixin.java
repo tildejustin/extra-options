@@ -1,11 +1,11 @@
 package me.voidxwalker.options.extra.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import me.voidxwalker.options.extra.*;
+import me.voidxwalker.options.extra.ExtraOptions;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.GameRenderer;
 import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
@@ -18,14 +18,5 @@ public abstract class GameRendererMixin {
         float addend = (this.client.player.nextNauseaStrength - this.client.player.lastNauseaStrength) * tickDelta;
         return original * ExtraOptions.getDistortionEffectScale() * ExtraOptions.getDistortionEffectScale()
                 + (addend * ExtraOptions.getDistortionEffectScale() * ExtraOptions.getDistortionEffectScale() - addend);
-    }
-
-    // lerping the constant from 70 to 60 in the fraction is the same as lerping the whole fraction from 1 to 60 / 70
-    @ModifyConstant(method = "method_3196", constant = @Constant(floatValue = 60))
-    private float lerpFovChangeInWater(float original) {
-        if (!ExtraOptions.affectWater) {
-            return MathHelperExt.lerp(ExtraOptions.getFovEffectScale(), 70, original);
-        }
-        return original;
     }
 }
