@@ -14,7 +14,7 @@ public abstract class GameRendererMixin {
     private MinecraftClient client;
 
     @ModifyExpressionValue(method = "setupCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/ClientPlayerEntity;lastTimeInPortal:F", ordinal = 0))
-    private float applyDistortionEffectScale1(float original, float tickDelta, int anaglyphFilter) {
+    private float applyDistortionEffectScale(float original, float tickDelta, int anaglyphFilter) {
         float addend = (this.client.player.timeInPortal - this.client.player.lastTimeInPortal) * tickDelta;
         return original * ExtraOptions.getDistortionEffectScale() * ExtraOptions.getDistortionEffectScale()
                 + (addend * ExtraOptions.getDistortionEffectScale() * ExtraOptions.getDistortionEffectScale() - addend);
