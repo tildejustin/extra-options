@@ -14,7 +14,7 @@ public abstract class GameRendererMixin {
     private MinecraftClient field_20681;
 
     @ModifyExpressionValue(method = "method_19086", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/ClientPlayerEntity;lastTimeInPortal:F", ordinal = 0))
-    private float applyDistortionEffectScale1(float original, float tickDelta) {
+    private float applyDistortionEffectScale(float original, float tickDelta) {
         float addend = (this.field_20681.player.timeInPortal - this.field_20681.player.lastTimeInPortal) * tickDelta;
         return (float) (original * ExtraOptions.getDistortionEffectScale() * ExtraOptions.getDistortionEffectScale()
                 + (addend * ExtraOptions.getDistortionEffectScale() * ExtraOptions.getDistortionEffectScale() - addend));
