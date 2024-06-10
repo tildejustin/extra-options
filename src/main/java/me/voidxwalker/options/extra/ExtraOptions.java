@@ -18,10 +18,6 @@ public class ExtraOptions {
     private static float distortionEffectScale = 1;
     private static float fovEffectScale = 1;
 
-    static {
-        GameOptions.Option.values();
-    }
-
     public static void init() throws IOException {
         if (!Files.exists(config)) {
             save();
