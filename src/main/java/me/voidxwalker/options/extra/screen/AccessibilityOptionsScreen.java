@@ -16,6 +16,7 @@ public class AccessibilityOptionsScreen extends Screen {
     private final Screen parent;
     private final GameOptions options;
     private String title;
+    private boolean optifineWarning = false;
 
     public AccessibilityOptionsScreen(Screen parent, GameOptions options) {
         this.parent = parent;
@@ -53,6 +54,15 @@ public class AccessibilityOptionsScreen extends Screen {
 
     @Override
     protected void buttonClicked(ButtonWidget button) {
+        if (button instanceof OptionButtonWidget) {
+            GameOption option = ((OptionButtonWidget) button).method_1088();
+            // disable boolean option buttons when optifine is loaded (id > 100), avoiding a crash
+            if (option.method_882() > 100 && (option == ExtraOptions.BOW_FOV_EFFECTS || option == ExtraOptions.SUBMERGED_FOV_EFFECTS)) {
+                optifineWarning = true;
+                return;
+            }
+        }
+
         if (button.active) {
             if (button.id == 200) {
                 this.client.options.save();
@@ -71,6 +81,9 @@ public class AccessibilityOptionsScreen extends Screen {
     public void render(int mouseX, int mouseY, float tickDelta) {
         this.renderBackground();
         this.drawCenteredString(this.textRenderer, this.title, this.width / 2, 20, 16777215);
+        if (optifineWarning) {
+            this.drawCenteredString(this.textRenderer, "Boolean options cannot be changed in-game while OptiFine is loaded!", this.width / 2, 31, 0xeed202);
+        }
         super.render(mouseX, mouseY, tickDelta);
     }
 }
