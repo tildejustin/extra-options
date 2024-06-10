@@ -13,9 +13,10 @@ public class ExtraOptions {
     private static final Path config = FabricLoader.getInstance().getConfigDir().resolve("extra-options.txt");
     public static DoubleOption DISTORTION_EFFECT_SCALE;
     public static DoubleOption FOV_EFFECT_SCALE;
-    public static BooleanOption DISABLE_BOW_FOV;
-    public static boolean disableBowFOV = false;
-    public static boolean affectWater = true;
+    public static BooleanOption BOW_FOV_EFFECTS;
+    public static BooleanOption SUBMERGED_FOV_EFFECTS;
+    public static boolean bowFOVEffects = true;
+    public static boolean submergedFOVEffects = true;
     private static float distortionEffectScale = 1;
     private static float fovEffectScale = 1;
 
@@ -45,10 +46,15 @@ public class ExtraOptions {
                     return d == 0 ? text + I18n.translate("options.off") : text + (int) (d * 100) + "%";
                 }
         );
-        DISABLE_BOW_FOV = new BooleanOption(
-                /* "extra-options.disableBowFOV" */ "Disable Bow FOV",
-                options -> disableBowFOV,
-                (options, value) -> disableBowFOV = value
+        BOW_FOV_EFFECTS = new BooleanOption(
+                /* "extra-options.bowFOVEffects" */ "Bow FOV Effects",
+                options -> bowFOVEffects,
+                (options, value) -> bowFOVEffects = value
+        );
+        SUBMERGED_FOV_EFFECTS = new BooleanOption(
+                /* "extra-options.submergedFOVEffects" */ "Submerged FOV Effects",
+                options -> submergedFOVEffects,
+                (options, value) -> submergedFOVEffects = value
         );
     }
 
@@ -65,11 +71,11 @@ public class ExtraOptions {
                     case "fovEffectScale":
                         setFovEffectScale(Float.parseFloat(value));
                         break;
-                    case "disableBowFOV":
-                        disableBowFOV = Boolean.parseBoolean(value);
+                    case "bowFOVEffects":
+                        bowFOVEffects = Boolean.parseBoolean(value);
                         break;
-                    case "affectWater":
-                        affectWater = Boolean.parseBoolean(value);
+                    case "submergedFOVEffects":
+                        submergedFOVEffects = Boolean.parseBoolean(value);
                         break;
                 }
             });
@@ -83,11 +89,8 @@ public class ExtraOptions {
         try (BufferedWriter writer = Files.newBufferedWriter(config, StandardCharsets.UTF_8)) {
             writer.write("screenEffectScale:" + distortionEffectScale + "\n");
             writer.write("fovEffectScale:" + fovEffectScale + "\n");
-            writer.write("disableBowFOV:" + disableBowFOV + "\n");
-            // semi-hidden option
-            if (!affectWater) {
-                writer.write("affectWater:" + affectWater + "\n");
-            }
+            writer.write("bowFOVEffects:" + bowFOVEffects + "\n");
+            writer.write("submergedFOVEffects:" + submergedFOVEffects + "\n");
         }
     }
 

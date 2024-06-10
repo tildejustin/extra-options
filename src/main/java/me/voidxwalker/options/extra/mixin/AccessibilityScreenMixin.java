@@ -18,10 +18,11 @@ public abstract class AccessibilityScreenMixin {
 
     @Inject(method = "<clinit>", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/screen/options/AccessibilityScreen;OPTIONS:[Lnet/minecraft/client/options/Option;", shift = At.Shift.AFTER))
     private static void addConfigurationButtons(CallbackInfo ci) {
-        Option[] newOptions = Arrays.copyOf(OPTIONS, OPTIONS.length + 3);
-        newOptions[newOptions.length - 3] = ExtraOptions.DISTORTION_EFFECT_SCALE;
-        newOptions[newOptions.length - 2] = ExtraOptions.FOV_EFFECT_SCALE;
-        newOptions[newOptions.length - 1] = ExtraOptions.DISABLE_BOW_FOV;
+        Option[] newOptions = Arrays.copyOf(OPTIONS, OPTIONS.length + 4);
+        newOptions[newOptions.length - 4] = ExtraOptions.DISTORTION_EFFECT_SCALE;
+        newOptions[newOptions.length - 3] = ExtraOptions.FOV_EFFECT_SCALE;
+        newOptions[newOptions.length - 2] = ExtraOptions.BOW_FOV_EFFECTS;
+        newOptions[newOptions.length - 1] = ExtraOptions.SUBMERGED_FOV_EFFECTS;
         OPTIONS = newOptions;
     }
 
