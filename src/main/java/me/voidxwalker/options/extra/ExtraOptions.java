@@ -14,7 +14,6 @@ public class ExtraOptions {
     public static GameOptions.Option FOV_EFFECT_SCALE;
     public static GameOptions.Option DISABLE_BOW_FOV;
     public static boolean disableBowFOV = false;
-    public static boolean affectWater = true;
     private static double distortionEffectScale = 1;
     private static double fovEffectScale = 1;
 
@@ -46,9 +45,6 @@ public class ExtraOptions {
                     case "disableBowFOV":
                         disableBowFOV = Boolean.parseBoolean(value);
                         break;
-                    case "affectWater":
-                        affectWater = Boolean.parseBoolean(value);
-                        break;
                 }
             });
         }
@@ -59,10 +55,6 @@ public class ExtraOptions {
             writer.write("screenEffectScale:" + distortionEffectScale + "\n");
             writer.write("fovEffectScale:" + fovEffectScale + "\n");
             writer.write("disableBowFOV:" + disableBowFOV + "\n");
-            // semi-hidden option
-            if (!affectWater) {
-                writer.write("affectWater:" + affectWater + "\n");
-            }
         }
     }
 
