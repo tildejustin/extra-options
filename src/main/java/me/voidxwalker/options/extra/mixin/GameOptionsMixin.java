@@ -23,7 +23,6 @@ public abstract class GameOptionsMixin {
         if (option == ExtraOptions.DISTORTION_EFFECT_SCALE) {
             ExtraOptions.setDistortionEffectScale(value);
         }
-
         if (option == ExtraOptions.FOV_EFFECT_SCALE) {
             ExtraOptions.setFovEffectScale((float) Math.sqrt(value));
         }
@@ -34,7 +33,6 @@ public abstract class GameOptionsMixin {
         if (option == ExtraOptions.DISTORTION_EFFECT_SCALE) {
             cir.setReturnValue(ExtraOptions.getDistortionEffectScale());
         }
-
         if (option == ExtraOptions.FOV_EFFECT_SCALE) {
             cir.setReturnValue((float) Math.pow(ExtraOptions.getFovEffectScale(), 2));
         }
@@ -42,17 +40,23 @@ public abstract class GameOptionsMixin {
 
     // should be setBooleanValue
     @Inject(method = "getBooleanValue", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/GameOptions;save()V"))
-    private void setBowFov(GameOptions.Option option, int integer, CallbackInfo ci) {
-        if (option == ExtraOptions.DISABLE_BOW_FOV) {
-            ExtraOptions.disableBowFOV = !ExtraOptions.disableBowFOV;
+    private void setBooleanOptions(GameOptions.Option option, int integer, CallbackInfo ci) {
+        if (option == ExtraOptions.BOW_FOV_EFFECTS) {
+            ExtraOptions.bowFOVEffects = !ExtraOptions.bowFOVEffects;
+        }
+        if (option == ExtraOptions.SUBMERGED_FOV_EFFECTS) {
+            ExtraOptions.submergedFOVEffects = !ExtraOptions.submergedFOVEffects;
         }
     }
 
     // should be getBooleanValue
     @Inject(method = "getIntVideoOptions", at = @At("HEAD"), cancellable = true)
-    private void getBowFov(GameOptions.Option option, CallbackInfoReturnable<Boolean> cir) {
-        if (option == ExtraOptions.DISABLE_BOW_FOV) {
-            cir.setReturnValue(ExtraOptions.disableBowFOV);
+    private void getBooleanOptions(GameOptions.Option option, CallbackInfoReturnable<Boolean> cir) {
+        if (option == ExtraOptions.BOW_FOV_EFFECTS) {
+            cir.setReturnValue(ExtraOptions.bowFOVEffects);
+        }
+        if (option == ExtraOptions.SUBMERGED_FOV_EFFECTS) {
+            cir.setReturnValue(ExtraOptions.submergedFOVEffects);
         }
     }
 
@@ -74,10 +78,12 @@ public abstract class GameOptionsMixin {
             GameOptions.Option last = options.get(options.size() - 1);
             ExtraOptions.DISTORTION_EFFECT_SCALE = newOption("DISTORTION_EFFECT_SCALE", last.ordinal() + 1, /* "options.screenEffectScale" */ "Distortion Effects", true, false);
             ExtraOptions.FOV_EFFECT_SCALE = newOption("FOV_EFFECT_SCALE", last.ordinal() + 2, /* "options.fovEffectScale" */ "FOV Effects", true, false);
-            ExtraOptions.DISABLE_BOW_FOV = newOption("DISABLE_BOW_FOV", last.ordinal() + 3, /* "extra-options.disableBowFOV" */ "Disable Bow FOV", false, true);
+            ExtraOptions.BOW_FOV_EFFECTS = newOption("BOW_FOV_EFFECTS", last.ordinal() + 3, /* "extra-options.bowFOVEffects" */ "Bow FOV Effects", false, true);
+            ExtraOptions.SUBMERGED_FOV_EFFECTS = newOption("SUBMERGED_FOV_EFFECTS", last.ordinal() + 4, /* "extra-options.submergedFOVEffects" */ "Submerged FOV Effects", false, true);
             options.add(ExtraOptions.DISTORTION_EFFECT_SCALE);
             options.add(ExtraOptions.FOV_EFFECT_SCALE);
-            options.add(ExtraOptions.DISABLE_BOW_FOV);
+            options.add(ExtraOptions.BOW_FOV_EFFECTS);
+            options.add(ExtraOptions.SUBMERGED_FOV_EFFECTS);
             field_1001 = options.toArray(new GameOptions.Option[0]);
         }
     }
