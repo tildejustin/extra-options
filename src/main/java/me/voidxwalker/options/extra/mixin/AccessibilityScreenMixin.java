@@ -21,8 +21,8 @@ public abstract class AccessibilityScreenMixin {
         Option[] newOptions = Arrays.copyOf(OPTIONS, OPTIONS.length + 4);
         newOptions[newOptions.length - 4] = ExtraOptions.DISTORTION_EFFECT_SCALE;
         newOptions[newOptions.length - 3] = ExtraOptions.FOV_EFFECT_SCALE;
-        newOptions[newOptions.length - 2] = ExtraOptions.BOW_FOV_EFFECTS;
-        newOptions[newOptions.length - 1] = ExtraOptions.SUBMERGED_FOV_EFFECTS;
+        newOptions[newOptions.length - 2] = ExtraOptions.CONTROL_BOW_FOV;
+        newOptions[newOptions.length - 1] = ExtraOptions.CONTROL_SUBMERGED_FOV;
         OPTIONS = newOptions;
     }
 

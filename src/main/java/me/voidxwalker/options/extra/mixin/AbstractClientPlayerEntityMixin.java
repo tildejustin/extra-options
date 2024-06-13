@@ -15,7 +15,7 @@ public abstract class AbstractClientPlayerEntityMixin {
     @WrapOperation(method = "getSpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/attribute/EntityAttributeInstance;getValue()D"))
     private double applyFovEffectScaleSpeedOnly(EntityAttributeInstance instance, Operation<Double> operation) {
         Double original = operation.call(instance);
-        if (ExtraOptions.bowFOVEffects) {
+        if (!ExtraOptions.controlBowFov) {
             return MathHelper.lerp(ExtraOptions.getFovEffectScale(), instance.getBaseValue(), original);
         }
         return original;
@@ -24,7 +24,7 @@ public abstract class AbstractClientPlayerEntityMixin {
     // vanilla 1.16.2+ and motiono implementation
     @ModifyReturnValue(method = "getSpeed", at = @At("RETURN"))
     public float applyFovEffectScale(float original) {
-        if (!ExtraOptions.bowFOVEffects) {
+        if (ExtraOptions.controlBowFov) {
             return MathHelper.lerp(ExtraOptions.getFovEffectScale(), 1, original);
         }
         return original;
