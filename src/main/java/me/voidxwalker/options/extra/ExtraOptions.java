@@ -14,10 +14,10 @@ public class ExtraOptions {
     private static final Path config = FabricLoader.getInstance().getConfigDir().resolve("extra-options.txt");
     public static DoubleOption DISTORTION_EFFECT_SCALE;
     public static DoubleOption FOV_EFFECT_SCALE;
-    public static BooleanOption BOW_FOV_EFFECTS;
-    public static BooleanOption SUBMERGED_FOV_EFFECTS;
-    public static boolean bowFOVEffects = true;
-    public static boolean submergedFOVEffects = true;
+    public static BooleanOption CONTROL_BOW_FOV;
+    public static BooleanOption CONTROL_SUBMERGED_FOV;
+    public static boolean controlBowFov = false;
+    public static boolean controlSubmergedFov = false;
     private static float distortionEffectScale = 1;
     private static float fovEffectScale = 1;
 
@@ -47,15 +47,15 @@ public class ExtraOptions {
                     return d == 0 ? text.append(ScreenTexts.OFF) : text.append((int) (d * 100) + "%");
                 }
         );
-        BOW_FOV_EFFECTS = new BooleanOption(
-                /* "extra-options.bowFOVEffects" */ "Bow FOV Effects",
-                options -> bowFOVEffects,
-                (options, value) -> bowFOVEffects = value
+        CONTROL_BOW_FOV = new BooleanOption(
+                /* "extra-options.controlBowFov" */ "Control Bow FOV",
+                options -> controlBowFov,
+                (options, value) -> controlBowFov = value
         );
-        SUBMERGED_FOV_EFFECTS = new BooleanOption(
-                /* "extra-options.submergedFOVEffects" */ "Submerged FOV Effects",
-                options -> submergedFOVEffects,
-                (options, value) -> submergedFOVEffects = value
+        CONTROL_SUBMERGED_FOV = new BooleanOption(
+                /* "extra-options.controlSubmergedFov" */ "Control Submerged FOV",
+                options -> controlSubmergedFov,
+                (options, value) -> controlSubmergedFov = value
         );
     }
 
@@ -72,11 +72,11 @@ public class ExtraOptions {
                     case "fovEffectScale":
                         setFovEffectScale(Float.parseFloat(value));
                         break;
-                    case "bowFOVEffects":
-                        bowFOVEffects = Boolean.parseBoolean(value);
+                    case "controlBowFov":
+                        controlBowFov = Boolean.parseBoolean(value);
                         break;
-                    case "submergedFOVEffects":
-                        submergedFOVEffects = Boolean.parseBoolean(value);
+                    case "controlSubmergedFov":
+                        controlSubmergedFov = Boolean.parseBoolean(value);
                         break;
                 }
             });
@@ -90,8 +90,8 @@ public class ExtraOptions {
         try (BufferedWriter writer = Files.newBufferedWriter(config, StandardCharsets.UTF_8)) {
             writer.write("screenEffectScale:" + distortionEffectScale + "\n");
             writer.write("fovEffectScale:" + fovEffectScale + "\n");
-            writer.write("bowFOVEffects:" + bowFOVEffects + "\n");
-            writer.write("submergedFOVEffects:" + submergedFOVEffects + "\n");
+            writer.write("controlBowFov:" + controlBowFov + "\n");
+            writer.write("controlSubmergedFov:" + controlSubmergedFov + "\n");
         }
     }
 
