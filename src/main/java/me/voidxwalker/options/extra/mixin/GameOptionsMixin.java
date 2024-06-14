@@ -37,21 +37,21 @@ public abstract class GameOptionsMixin {
 
     @Inject(method = "setOption(Lnet/minecraft/client/option/GameOption;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/GameOptions;save()V"))
     private void setBooleanOptions(GameOption option, int integer, CallbackInfo ci) {
-        if (option == ExtraOptions.BOW_FOV_EFFECTS) {
-            ExtraOptions.bowFOVEffects = !ExtraOptions.bowFOVEffects;
+        if (option == ExtraOptions.CONTROL_BOW_FOV) {
+            ExtraOptions.controlBowFov = !ExtraOptions.controlBowFov;
         }
-        if (option == ExtraOptions.SUBMERGED_FOV_EFFECTS) {
-            ExtraOptions.submergedFOVEffects = !ExtraOptions.submergedFOVEffects;
+        if (option == ExtraOptions.CONTROL_SUBMERGED_FOV) {
+            ExtraOptions.controlSubmergedFov = !ExtraOptions.controlSubmergedFov;
         }
     }
 
     @Inject(method = "gteIntOption", at = @At("HEAD"), cancellable = true)
     private void getBooleanOptions(GameOption option, CallbackInfoReturnable<Boolean> cir) {
-        if (option == ExtraOptions.BOW_FOV_EFFECTS) {
-            cir.setReturnValue(ExtraOptions.bowFOVEffects);
+        if (option == ExtraOptions.CONTROL_BOW_FOV) {
+            cir.setReturnValue(ExtraOptions.controlBowFov);
         }
-        if (option == ExtraOptions.SUBMERGED_FOV_EFFECTS) {
-            cir.setReturnValue(ExtraOptions.submergedFOVEffects);
+        if (option == ExtraOptions.CONTROL_SUBMERGED_FOV) {
+            cir.setReturnValue(ExtraOptions.controlSubmergedFov);
         }
     }
 }
