@@ -11,8 +11,8 @@ public class AccessibilityOptionsScreen extends Screen {
     private static final GameOption[] OPTIONS = new GameOption[]{
             ExtraOptions.DISTORTION_EFFECT_SCALE,
             ExtraOptions.FOV_EFFECT_SCALE,
-            ExtraOptions.BOW_FOV_EFFECTS,
-            ExtraOptions.SUBMERGED_FOV_EFFECTS
+            ExtraOptions.CONTROL_BOW_FOV,
+            ExtraOptions.CONTROL_SUBMERGED_FOV
     };
     private final Screen parent;
     private final GameOptions options;
