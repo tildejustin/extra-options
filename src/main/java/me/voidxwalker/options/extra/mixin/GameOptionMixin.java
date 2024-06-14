@@ -28,12 +28,12 @@ public abstract class GameOptionMixin {
         GameOption last = options.get(options.size() - 1);
         ExtraOptions.DISTORTION_EFFECT_SCALE = newOption("DISTORTION_EFFECT_SCALE", last.ordinal() + 1, /* "options.screenEffectScale" */ "Distortion Effects", true, false);
         ExtraOptions.FOV_EFFECT_SCALE = newOption("FOV_EFFECT_SCALE", last.ordinal() + 2, /* "options.fovEffectScale" */ "FOV Effects", true, false);
-        ExtraOptions.BOW_FOV_EFFECTS = newOption("BOW_FOV_EFFECTS", last.ordinal() + 3, /* "extra-options.bowFOVEffects" */ "Bow FOV Effects", false, true);
-        ExtraOptions.SUBMERGED_FOV_EFFECTS = newOption("SUBMERGED_FOV_EFFECTS", last.ordinal() + 4, /* extra-options.submergedFOVEffects */ "Submerged FOV Effects", false, true);
+        ExtraOptions.CONTROL_BOW_FOV = newOption("CONTROL_BOW_FOV", last.ordinal() + 3, /* "extra-options.controlBowFov" */ "Control Bow FOV", false, true);
+        ExtraOptions.CONTROL_SUBMERGED_FOV = newOption("CONTROL_SUBMERGED_FOV", last.ordinal() + 4, /* extra-options.controlSubmergedFov */ "Control Submerged FOV", false, true);
         options.add(ExtraOptions.DISTORTION_EFFECT_SCALE);
         options.add(ExtraOptions.FOV_EFFECT_SCALE);
-        options.add(ExtraOptions.BOW_FOV_EFFECTS);
-        options.add(ExtraOptions.SUBMERGED_FOV_EFFECTS);
+        options.add(ExtraOptions.CONTROL_BOW_FOV);
+        options.add(ExtraOptions.CONTROL_SUBMERGED_FOV);
         field_1001 = options.toArray(new GameOption[0]);
     }
 }
