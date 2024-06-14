@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.*;
 public abstract class GameRendererMixin {
     // net.minecraft.class_757.method_3185 -> GameRenderer#applyCameraTransformations, 1.14.x
     @Dynamic
-    @ModifyExpressionValue(method = {"renderWorld", "Lnet/minecraft/class_757;method_3185(F)V"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;lerp(FFF)F"), require = 1)
+    @ModifyExpressionValue(method = {"renderWorld", "method_3185(F)V"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;lerp(FFF)F"), require = 1)
     private float applyDistortionEffectScale(float original) {
         return original * ExtraOptions.getDistortionEffectScale() * ExtraOptions.getDistortionEffectScale();
     }

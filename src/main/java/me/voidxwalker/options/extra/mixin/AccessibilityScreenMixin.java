@@ -28,7 +28,7 @@ public abstract class AccessibilityScreenMixin {
 
     // method_25426 -> init for 20w14infinite where it's obfuscated
     @Dynamic
-    @ModifyArg(method = {"init", "Lnet/minecraft/class_4189;method_25426()V"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/ButtonWidget;<init>(IIIILjava/lang/String;Lnet/minecraft/client/gui/widget/ButtonWidget$PressAction;)V"), index = 1, require = 1)
+    @ModifyArg(method = {"init", "method_25426()V"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/ButtonWidget;<init>(IIIILjava/lang/String;Lnet/minecraft/client/gui/widget/ButtonWidget$PressAction;)V"), index = 1, require = 1)
     private int moveDoneButtonDown(int original) {
         return original - 144 + (OPTIONS.length + 1) / 2 * (20 + 4);
     }
