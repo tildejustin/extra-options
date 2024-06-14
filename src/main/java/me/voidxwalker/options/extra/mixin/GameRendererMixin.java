@@ -22,7 +22,7 @@ public abstract class GameRendererMixin {
     // lerping the constant from 70 to 60 in the fraction is the same as lerping the whole fraction from 1 to 60 / 70
     @ModifyConstant(method = "getFov", constant = @Constant(floatValue = 60))
     private float lerpFovChangeInWater(float original) {
-        if (!ExtraOptions.submergedFOVEffects) {
+        if (ExtraOptions.controlSubmergedFov) {
             return MathHelperExt.lerp(ExtraOptions.getFovEffectScale(), 70, original);
         }
         return original;
