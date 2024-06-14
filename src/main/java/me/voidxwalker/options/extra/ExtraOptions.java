@@ -12,10 +12,10 @@ public class ExtraOptions {
     private static final Path config = FabricLoader.getInstance().getConfigDir().resolve("extra-options.txt");
     public static GameOptions.Option DISTORTION_EFFECT_SCALE;
     public static GameOptions.Option FOV_EFFECT_SCALE;
-    public static GameOptions.Option BOW_FOV_EFFECTS;
-    public static GameOptions.Option SUBMERGED_FOV_EFFECTS;
-    public static boolean bowFOVEffects = true;
-    public static boolean submergedFOVEffects = true;
+    public static GameOptions.Option CONTROL_BOW_FOV;
+    public static GameOptions.Option CONTROL_SUBMERGED_FOV;
+    public static boolean controlBowFov = false;
+    public static boolean controlSubmergedFov = false;
     private static float distortionEffectScale = 1;
     private static float fovEffectScale = 1;
 
@@ -39,11 +39,11 @@ public class ExtraOptions {
                     case "fovEffectScale":
                         setFovEffectScale(Float.parseFloat(value));
                         break;
-                    case "bowFOVEffects":
-                        bowFOVEffects = Boolean.parseBoolean(value);
+                    case "controlBowFov":
+                        controlBowFov = Boolean.parseBoolean(value);
                         break;
-                    case "submergedFOVEffects":
-                        submergedFOVEffects = Boolean.parseBoolean(value);
+                    case "controlSubmergedFov":
+                        controlSubmergedFov = Boolean.parseBoolean(value);
                         break;
                 }
             });
@@ -57,8 +57,8 @@ public class ExtraOptions {
         try (BufferedWriter writer = Files.newBufferedWriter(config, StandardCharsets.UTF_8)) {
             writer.write("screenEffectScale:" + distortionEffectScale + "\n");
             writer.write("fovEffectScale:" + fovEffectScale + "\n");
-            writer.write("bowFOVEffects:" + bowFOVEffects + "\n");
-            writer.write("submergedFOVEffects:" + submergedFOVEffects + "\n");
+            writer.write("controlBowFov:" + controlBowFov + "\n");
+            writer.write("controlSubmergedFov:" + controlSubmergedFov + "\n");
         }
     }
 
