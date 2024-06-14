@@ -10,8 +10,8 @@ public class AccessibilityOptionsScreen extends Screen {
     private static final GameOption[] OPTIONS = new GameOption[]{
             ExtraOptions.DISTORTION_EFFECT_SCALE,
             ExtraOptions.FOV_EFFECT_SCALE,
-            ExtraOptions.BOW_FOV_EFFECTS,
-            ExtraOptions.SUBMERGED_FOV_EFFECTS
+            ExtraOptions.CONTROL_BOW_FOV,
+            ExtraOptions.CONTROL_SUBMERGED_FOV
     };
     private final Screen parent;
     private final GameOptions options;
@@ -56,7 +56,7 @@ public class AccessibilityOptionsScreen extends Screen {
         if (button instanceof OptionButtonWidget) {
             GameOption option = ((OptionButtonWidget) button).method_1088();
             // disable boolean option buttons when optifine is loaded (id > 100), avoiding a crash
-            if (option.method_882() > 100 && (option == ExtraOptions.BOW_FOV_EFFECTS || option == ExtraOptions.SUBMERGED_FOV_EFFECTS)) {
+            if (option.method_882() > 100 && (option == ExtraOptions.CONTROL_BOW_FOV || option == ExtraOptions.CONTROL_SUBMERGED_FOV)) {
                 optifineWarning = true;
                 return;
             }
