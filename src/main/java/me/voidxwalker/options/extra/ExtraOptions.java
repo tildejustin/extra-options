@@ -63,21 +63,28 @@ public class ExtraOptions {
         try (BufferedReader reader = Files.newBufferedReader(config, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
                 String[] split = line.split(":");
+                if (split.length == 2) {
+                    System.err.println("error in extra options config");
+                }
                 String option = split[0];
                 String value = split[1];
-                switch (option) {
-                    case "screenEffectScale":
-                        setDistortionEffectScale(Float.parseFloat(value));
-                        break;
-                    case "fovEffectScale":
-                        setFovEffectScale(Float.parseFloat(value));
-                        break;
-                    case "controlBowFov":
-                        controlBowFov = Boolean.parseBoolean(value);
-                        break;
-                    case "controlSubmergedFov":
-                        controlSubmergedFov = Boolean.parseBoolean(value);
-                        break;
+                try {
+                    switch (option) {
+                        case "screenEffectScale":
+                            setDistortionEffectScale(Float.parseFloat(value));
+                            break;
+                        case "fovEffectScale":
+                            setFovEffectScale(Float.parseFloat(value));
+                            break;
+                        case "controlBowFov":
+                            controlBowFov = Boolean.parseBoolean(value);
+                            break;
+                        case "controlSubmergedFov":
+                            controlSubmergedFov = Boolean.parseBoolean(value);
+                            break;
+                    }
+                } catch (NumberFormatException e) {
+                    System.err.println("error in extra options config");
                 }
             });
         }
