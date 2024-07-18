@@ -63,8 +63,9 @@ public class ExtraOptions {
         try (BufferedReader reader = Files.newBufferedReader(config, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
                 String[] split = line.split(":");
-                if (split.length == 2) {
+                if (split.length != 2) {
                     System.err.println("error in extra options config");
+                    return;
                 }
                 String option = split[0];
                 String value = split[1];
