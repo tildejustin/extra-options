@@ -1,6 +1,5 @@
 package me.voidxwalker.options.extra;
 
-import net.fabricmc.loader.api.*;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.options.*;
 import net.minecraft.text.MutableText;
@@ -8,8 +7,6 @@ import net.minecraft.util.math.MathHelper;
 import org.mcsr.speedrunapi.config.SpeedrunConfigContainer;
 import org.mcsr.speedrunapi.config.api.SpeedrunConfig;
 import org.mcsr.speedrunapi.config.api.annotations.Config;
-
-import java.lang.reflect.*;
 
 public class ExtraOptions implements SpeedrunConfig {
     @Config.Ignored
@@ -34,22 +31,9 @@ public class ExtraOptions implements SpeedrunConfig {
     private static float fovEffectScale = 1;
 
     @Config.Ignored
-    public static SpeedrunConfigContainer<ExtraOptions> container;
-
-    @Override
-    public String modID() {
-        return "extra-options";
-    }
+    public static SpeedrunConfigContainer<?> container;
 
     public void entrypoint() {
-        try {
-            Constructor<SpeedrunConfigContainer> ctor = SpeedrunConfigContainer.class.getDeclaredConstructor(SpeedrunConfig.class, ModContainer.class);
-            ctor.setAccessible(true);
-            container = ctor.newInstance(this, FabricLoader.getInstance().getModContainer("extra-options").get());
-        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-
         DISTORTION_EFFECT_SCALE = new DoubleOption(
                 /* "options.screenEffectScale" */ "Distortion Effects", 0, 1, 0,
                 options -> (double) distortionEffectScale,
@@ -96,5 +80,20 @@ public class ExtraOptions implements SpeedrunConfig {
 
     public static void setFovEffectScale(float fovEffectScale) {
         ExtraOptions.fovEffectScale = MathHelper.clamp(fovEffectScale, 0, 1);
+    }
+
+    @Override
+    public void finishInitialization(SpeedrunConfigContainer<?> container) {
+        ExtraOptions.container = container;
+    }
+
+    @Override
+    public String modID() {
+        return "extra-options";
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return false;
     }
 }
