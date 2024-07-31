@@ -1,31 +1,54 @@
 package me.voidxwalker.options.extra;
 
-import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.*;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.options.*;
 import net.minecraft.text.MutableText;
 import net.minecraft.util.math.MathHelper;
+import org.mcsr.speedrunapi.config.SpeedrunConfigContainer;
+import org.mcsr.speedrunapi.config.api.SpeedrunConfig;
+import org.mcsr.speedrunapi.config.api.annotations.Config;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.lang.reflect.*;
 
-public class ExtraOptions {
-    private static final Path config = FabricLoader.getInstance().getConfigDir().resolve("extra-options.txt");
+public class ExtraOptions implements SpeedrunConfig {
+    @Config.Ignored
     public static DoubleOption DISTORTION_EFFECT_SCALE;
+    @Config.Ignored
     public static DoubleOption FOV_EFFECT_SCALE;
+    @Config.Ignored
     public static BooleanOption CONTROL_BOW_FOV;
+    @Config.Ignored
     public static BooleanOption CONTROL_SUBMERGED_FOV;
+
     public static boolean controlBowFov = false;
+
     public static boolean controlSubmergedFov = false;
+
+    @Config.Access(getter = "getDistortionEffectScale", setter = "setDistortionEffectScale")
+    @Config.Numbers.Fractional.Bounds(max = 1)
     private static float distortionEffectScale = 1;
+
+    @Config.Access(getter = "getFovEffectScale", setter = "setFovEffectScale")
+    @Config.Numbers.Fractional.Bounds(max = 1)
     private static float fovEffectScale = 1;
 
-    public static void init() throws IOException {
-        if (!Files.exists(config)) {
-            save();
+    @Config.Ignored
+    public static SpeedrunConfigContainer<ExtraOptions> container;
+
+    @Override
+    public String modID() {
+        return "extra-options";
+    }
+
+    public void entrypoint() {
+        try {
+            Constructor<SpeedrunConfigContainer> ctor = SpeedrunConfigContainer.class.getDeclaredConstructor(SpeedrunConfig.class, ModContainer.class);
+            ctor.setAccessible(true);
+            container = ctor.newInstance(this, FabricLoader.getInstance().getModContainer("extra-options").get());
+        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
-        load();
 
         DISTORTION_EFFECT_SCALE = new DoubleOption(
                 /* "options.screenEffectScale" */ "Distortion Effects", 0, 1, 0,
@@ -57,50 +80,6 @@ public class ExtraOptions {
                 options -> controlSubmergedFov,
                 (options, value) -> controlSubmergedFov = value
         );
-    }
-
-    public static void load() throws IOException {
-        try (BufferedReader reader = Files.newBufferedReader(config, StandardCharsets.UTF_8)) {
-            reader.lines().forEach(line -> {
-                String[] split = line.split(":");
-                if (split.length != 2) {
-                    System.err.println("error in extra options config");
-                    return;
-                }
-                String option = split[0];
-                String value = split[1];
-                try {
-                    switch (option) {
-                        case "screenEffectScale":
-                            setDistortionEffectScale(Float.parseFloat(value));
-                            break;
-                        case "fovEffectScale":
-                            setFovEffectScale(Float.parseFloat(value));
-                            break;
-                        case "controlBowFov":
-                            controlBowFov = Boolean.parseBoolean(value);
-                            break;
-                        case "controlSubmergedFov":
-                            controlSubmergedFov = Boolean.parseBoolean(value);
-                            break;
-                    }
-                } catch (NumberFormatException e) {
-                    System.err.println("error in extra options config");
-                }
-            });
-        }
-    }
-
-    public static void save() throws IOException {
-        if (Files.notExists(config)) {
-            Files.createFile(config);
-        }
-        try (BufferedWriter writer = Files.newBufferedWriter(config, StandardCharsets.UTF_8)) {
-            writer.write("screenEffectScale:" + distortionEffectScale + "\n");
-            writer.write("fovEffectScale:" + fovEffectScale + "\n");
-            writer.write("controlBowFov:" + controlBowFov + "\n");
-            writer.write("controlSubmergedFov:" + controlSubmergedFov + "\n");
-        }
     }
 
     public static float getDistortionEffectScale() {

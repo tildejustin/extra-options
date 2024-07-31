@@ -29,7 +29,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "me.voidxwalker.options.extra.ExtraOptions::init"
+      "me.voidxwalker.options.extra.ExtraOptions::entrypoint"
     ]
   },
   "mixins": [
