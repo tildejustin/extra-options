@@ -5,7 +5,7 @@ fabric_loader = "0.15.11"
 loom = "1.6-SNAPSHOT"
 vineflower = "1.10.1"
 # https://jitpack.io/#kingcontaria/speedrunapi
-speedrunapi = "a3e3998294"
+speedrunapi = "8c2a7c1f8a"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }

@@ -93,7 +93,7 @@ public class ExtraOptions implements SpeedrunConfig {
     }
 
     @Override
-    public boolean isAvailable() {
+    public boolean hasConfigScreen() {
         return false;
     }
 }
