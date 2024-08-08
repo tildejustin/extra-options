@@ -13,7 +13,7 @@ import java.io.IOException;
 public abstract class GameOptionsMixin {
     @Inject(method = "write", at = @At("TAIL"))
     private void writeExtraOptions(CallbackInfo ci) throws IOException {
-        ExtraOptions.save();
+        ExtraOptions.container.save();
     }
 
     @Inject(method = "load", at = @At(value = "FIELD", target = "Lnet/minecraft/client/options/GameOptions;keysAll:[Lnet/minecraft/client/options/KeyBinding;"))
