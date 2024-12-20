@@ -1,8 +1,7 @@
 package me.voidxwalker.options.extra;
 
-import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.options.*;
-import net.minecraft.text.MutableText;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.util.math.MathHelper;
 import org.mcsr.speedrunapi.config.SpeedrunConfigContainer;
 import org.mcsr.speedrunapi.config.api.SpeedrunConfig;
@@ -40,8 +39,8 @@ public class ExtraOptions implements SpeedrunConfig {
                 (options, value) -> distortionEffectScale = value.floatValue(),
                 (options, option) -> {
                     double d = option.getRatio(option.get(options));
-                    MutableText text = option.getDisplayPrefix();
-                    return d == 0 ? text.append(ScreenTexts.OFF) : text.append((int) (d * 100) + "%");
+                    String text = option.getDisplayPrefix();
+                    return d == 0 ? text + I18n.translate("options.off") : text + (int) (d * 100) + "%";
                 }
         );
         FOV_EFFECT_SCALE = new DoubleOption(
@@ -50,8 +49,8 @@ public class ExtraOptions implements SpeedrunConfig {
                 (options, value) -> fovEffectScale = (float) Math.sqrt(value),
                 (options, option) -> {
                     double d = option.getRatio(option.get(options));
-                    MutableText text = option.getDisplayPrefix();
-                    return d == 0 ? text.append(ScreenTexts.OFF) : text.append((int) (d * 100) + "%");
+                    String text = option.getDisplayPrefix();
+                    return d == 0 ? text + I18n.translate("options.off") : text + (int) (d * 100) + "%";
                 }
         );
         CONTROL_BOW_FOV = new BooleanOption(

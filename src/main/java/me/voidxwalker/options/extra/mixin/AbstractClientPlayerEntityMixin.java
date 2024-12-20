@@ -1,27 +1,29 @@
 package me.voidxwalker.options.extra.mixin;
 
-import com.llamalad7.mixinextras.injector.*;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.*;
 import com.mojang.authlib.GameProfile;
 import me.voidxwalker.options.extra.ExtraOptions;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(AbstractClientPlayerEntity.class)
 public abstract class AbstractClientPlayerEntityMixin extends PlayerEntity {
-    public AbstractClientPlayerEntityMixin(World world, BlockPos blockPos, GameProfile gameProfile) {
-        super(world, blockPos, gameProfile);
+    public AbstractClientPlayerEntityMixin(World world, GameProfile profile) {
+        super(world, profile);
     }
 
     // more targeted implementation that only ignores player speed's effect on fov but not bows or creative flight
-    @ModifyExpressionValue(method = "getSpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;getAttributeValue(Lnet/minecraft/entity/attribute/EntityAttribute;)D"))
-    private double applyFovEffectScaleSpeedOnly(double original) {
+    @WrapOperation(method = "getSpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/attribute/EntityAttributeInstance;getValue()D"))
+    private double applyFovEffectScaleSpeedOnly(EntityAttributeInstance instance, Operation<Double> operation) {
+        Double original = operation.call(instance);
         if (!ExtraOptions.controlBowFov) {
-            return MathHelper.lerp(ExtraOptions.getFovEffectScale(), this.getAttributeBaseValue(EntityAttributes.GENERIC_MOVEMENT_SPEED), original);
+            return MathHelper.lerp(ExtraOptions.getFovEffectScale(), instance.getBaseValue(), original);
         }
         return original;
     }
