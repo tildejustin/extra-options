@@ -7,7 +7,8 @@
     "AbstractClientPlayerEntityMixin",
     "AccessibilityOptionsScreenMixin",
     "GameOptionsMixin",
-    "GameRendererMixin"
+    "GameRendererMixin",
+    "KeyboardMixin"
   ],
   "injectors": {
     "defaultRequire": 1

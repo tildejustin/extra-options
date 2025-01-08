@@ -17,10 +17,14 @@ public class ExtraOptions implements SpeedrunConfig {
     public static BooleanOption CONTROL_BOW_FOV;
     @Config.Ignored
     public static BooleanOption CONTROL_SUBMERGED_FOV;
+    @Config.Ignored
+    public static BooleanOption NARRATOR_HOTKEY;
 
     public static boolean controlBowFov = false;
 
     public static boolean controlSubmergedFov = false;
+
+    public static boolean narratorHotkey = false;
 
     @Config.Access(getter = "getDistortionEffectScale", setter = "setDistortionEffectScale")
     @Config.Numbers.Fractional.Bounds(max = 1)
@@ -63,6 +67,11 @@ public class ExtraOptions implements SpeedrunConfig {
                 /* "extra-options.controlSubmergedFov" */ "Control Submerged FOV",
                 options -> controlSubmergedFov,
                 (options, value) -> controlSubmergedFov = value
+        );
+        NARRATOR_HOTKEY = new BooleanOption(
+                /* extra.option.narrator_hotkey */ "Narrator Hotkey",
+                options -> narratorHotkey,
+                (options, value) -> narratorHotkey = value
         );
     }
 

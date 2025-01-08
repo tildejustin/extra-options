@@ -18,11 +18,12 @@ public abstract class AccessibilityOptionsScreenMixin {
 
     @Inject(method = "<clinit>", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/screen/options/AccessibilityOptionsScreen;OPTIONS:[Lnet/minecraft/client/options/Option;", shift = At.Shift.AFTER))
     private static void addConfigurationButtons(CallbackInfo ci) {
-        Option[] newOptions = Arrays.copyOf(OPTIONS, OPTIONS.length + 4);
-        newOptions[newOptions.length - 4] = ExtraOptions.DISTORTION_EFFECT_SCALE;
-        newOptions[newOptions.length - 3] = ExtraOptions.FOV_EFFECT_SCALE;
-        newOptions[newOptions.length - 2] = ExtraOptions.CONTROL_BOW_FOV;
-        newOptions[newOptions.length - 1] = ExtraOptions.CONTROL_SUBMERGED_FOV;
+        Option[] newOptions = Arrays.copyOf(OPTIONS, OPTIONS.length + 5);
+        newOptions[newOptions.length - 5] = ExtraOptions.DISTORTION_EFFECT_SCALE;
+        newOptions[newOptions.length - 4] = ExtraOptions.FOV_EFFECT_SCALE;
+        newOptions[newOptions.length - 3] = ExtraOptions.CONTROL_BOW_FOV;
+        newOptions[newOptions.length - 2] = ExtraOptions.CONTROL_SUBMERGED_FOV;
+        newOptions[newOptions.length - 1] = ExtraOptions.NARRATOR_HOTKEY;
         OPTIONS = newOptions;
     }
 
