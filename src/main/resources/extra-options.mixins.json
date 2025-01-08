@@ -5,9 +5,8 @@
   "compatibilityLevel": "JAVA_8",
   "client": [
     "AbstractClientPlayerEntityMixin",
-    "AccessibilityOptionsScreenMixin",
-    "GameOptionsMixin",
-    "GameRendererMixin"
+    "GameRendererMixin",
+    "KeyboardMixin"
   ],
   "injectors": {
     "defaultRequire": 1

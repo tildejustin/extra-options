@@ -27,11 +27,6 @@
   },
   "license": "MIT",
   "environment": "client",
-  "entrypoints": {
-    "client": [
-      "me.voidxwalker.options.extra.ExtraOptions::entrypoint"
-    ]
-  },
   "mixins": [
     "extra-options.mixins.json"
   ],

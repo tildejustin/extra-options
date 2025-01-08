@@ -1,0 +1,14 @@
+{
+  "speedrunapi.config.extra-options.option.distortionEffectScale": "Distortion Effects",
+  "speedrunapi.config.extra-options.option.distortionEffectScale.description": "",
+  "speedrunapi.config.extra-options.option.distortionEffectScale.0": "OFF",
+  "speedrunapi.config.extra-options.option.fovEffectScale": "FOV Effects",
+  "speedrunapi.config.extra-options.option.fovEffectScale.description": "",
+  "speedrunapi.config.extra-options.option.fovEffectScale.0": "OFF",
+  "speedrunapi.config.extra-options.option.controlBowFov": "Control Bow FOV",
+  "speedrunapi.config.extra-options.option.controlBowFov.description": "",
+  "speedrunapi.config.extra-options.option.controlSubmergedFov": "Control Submerged FOV",
+  "speedrunapi.config.extra-options.option.controlSubmergedFov.description": "",
+  "speedrunapi.config.extra-options.option.narratorHotkey": "Narrator Hotkey",
+  "speedrunapi.config.extra-options.option.narratorHotkey.description": "Allows the Narrator to be toggled on and off with 'Ctrl+B'."
+}
