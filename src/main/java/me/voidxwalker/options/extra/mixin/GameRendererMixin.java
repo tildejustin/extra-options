@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.*;
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
     @Shadow
-    @Final
     private MinecraftClient client;
 
     @ModifyExpressionValue(method = "setupCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/ClientPlayerEntity;lastTimeInPortal:F", ordinal = 0))

@@ -1,7 +1,7 @@
 package me.voidxwalker.options.extra.mixin;
 
 import me.voidxwalker.options.extra.ExtraOptions;
-import net.minecraft.client.option.GameOptions;
+import net.minecraft.client.options.GameOptions;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -39,7 +39,7 @@ public abstract class GameOptionsMixin {
     }
 
     // should be setBooleanValue
-    @Inject(method = "getBooleanValue", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/GameOptions;save()V"))
+    @Inject(method = "getBooleanValue", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/options/GameOptions;save()V"))
     private void setBooleanOptions(GameOptions.Option option, int integer, CallbackInfo ci) {
         if (option == ExtraOptions.CONTROL_BOW_FOV) {
             ExtraOptions.controlBowFov = !ExtraOptions.controlBowFov;
@@ -72,7 +72,7 @@ public abstract class GameOptionsMixin {
             return null;
         }
 
-        @Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = Opcodes.PUTSTATIC, target = "Lnet/minecraft/client/option/GameOptions$Option;field_1001:[Lnet/minecraft/client/option/GameOptions$Option;", shift = At.Shift.AFTER))
+        @Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = Opcodes.PUTSTATIC, target = "Lnet/minecraft/client/options/GameOptions$Option;field_1001:[Lnet/minecraft/client/options/GameOptions$Option;", shift = At.Shift.AFTER))
         private static void addAccessibilityOptions(CallbackInfo ci) {
             ArrayList<GameOptions.Option> options = new ArrayList<>(Arrays.asList(field_1001));
             GameOptions.Option last = options.get(options.size() - 1);

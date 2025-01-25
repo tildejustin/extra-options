@@ -12,6 +12,7 @@ base {
 }
 
 repositories {
+    maven { url "https://maven.legacyfabric.net" }
     maven { url "https://jitpack.io" }
 }
 
@@ -28,7 +29,7 @@ loom {
 
 dependencies {
     minecraft libs.minecraft
-    mappings legacy.yarn(libs.versions.minecraft.get(), libs.versions.yarn.build.get())
+    mappings variantOf(libs.yarn.mappings) { classifier "v2" }
     modImplementation libs.fabric.loader
     vineflowerDecompilerClasspath libs.vineflower
 }

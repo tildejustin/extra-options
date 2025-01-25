@@ -2,7 +2,7 @@ package me.voidxwalker.options.extra.mixin;
 
 import me.voidxwalker.options.extra.screen.AccessibilityOptionsScreen;
 import net.minecraft.client.gui.screen.*;
-import net.minecraft.client.option.GameOptions;
+import net.minecraft.client.options.GameOptions;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
@@ -18,7 +18,7 @@ public abstract class SettingsScreenMixin {
         return "Accessibility Settings...";
     }
 
-    @ModifyArg(method = "buttonClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;setScreen(Lnet/minecraft/client/gui/screen/Screen;)V", ordinal = 0), slice = @Slice(from = @At(value = "CONSTANT", args = "intValue=104")))
+    @ModifyArg(method = "buttonClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;openScreen(Lnet/minecraft/client/gui/screen/Screen;)V", ordinal = 0), slice = @Slice(from = @At(value = "CONSTANT", args = "intValue=104")))
     private Screen openAccessibilityScreen(@Nullable Screen screen) {
         return new AccessibilityOptionsScreen((Screen) (Object) this, this.options);
     }

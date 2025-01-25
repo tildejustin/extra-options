@@ -3,7 +3,7 @@ package me.voidxwalker.options.extra.screen;
 import me.voidxwalker.options.extra.ExtraOptions;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.*;
-import net.minecraft.client.option.GameOptions;
+import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.resource.language.I18n;
 
 public class AccessibilityOptionsScreen extends Screen {
@@ -29,7 +29,7 @@ public class AccessibilityOptionsScreen extends Screen {
 
         for (GameOptions.Option option : OPTIONS) {
             if (option.isNumeric()) {
-                this.buttons.add(new OptionSliderWidget(option.getOrdinal(), this.width / 2 - 155 + i % 2 * 160, this.height / 6 + 24 * (i >> 1), option));
+                this.buttons.add(new OptionSliderWidget(option.getOrdinal(), this.width / 2 - 155 + i % 2 * 160, this.height / 6 + 24 * (i >> 1), option, false));
             } else {
                 OptionButtonWidget optionButtonWidget = new OptionButtonWidget(
                         option.getOrdinal(), this.width / 2 - 155 + i % 2 * 160, this.height / 6 + 24 * (i >> 1), option, this.options.getValueMessage(option)
@@ -55,7 +55,7 @@ public class AccessibilityOptionsScreen extends Screen {
         if (button.active) {
             if (button.id == 200) {
                 this.client.options.save();
-                this.client.setScreen(this.parent);
+                this.client.openScreen(this.parent);
                 return;
             }
 
