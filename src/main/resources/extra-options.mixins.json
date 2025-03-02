@@ -6,7 +6,12 @@
   "client": [
     "AbstractClientPlayerEntityMixin",
     "GameRendererMixin",
-    "KeyboardMixin"
+    "KeyboardMixin",
+    "SoundEngineMixin",
+    "SoundSystemMixin",
+    "accessors.AlUtilAccessor",
+    "accessors.SoundManagerAccessor",
+    "accessors.SoundSystemAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
