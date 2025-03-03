@@ -36,7 +36,7 @@ public abstract class SoundSystemMixin {
 
     @Inject(method = "tick(Z)V", at = @At("HEAD"))
     private void tickDevice(boolean bl, CallbackInfo ci) {
-        if (this.shouldReloadSounds()) {
+        if (ExtraOptions.autoDetectDevices && this.shouldReloadSounds()) {
             this.reloadSounds();
         }
     }

@@ -31,6 +31,8 @@ public class ExtraOptions implements SpeedrunConfig {
 
     public static String audioDevice = "";
 
+    public static boolean autoDetectDevices = false;
+
     @SuppressWarnings("unused")
     private Text getPercentText(float value) {
         return value == 0 ? ScreenTexts.OFF : new LiteralText((int) (value * 100) + "%");

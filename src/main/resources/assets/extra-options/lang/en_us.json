@@ -12,5 +12,7 @@
   "speedrunapi.config.extra-options.option.narratorHotkey": "Narrator Hotkey",
   "speedrunapi.config.extra-options.option.narratorHotkey.description": "Allows the Narrator to be toggled on and off with 'Ctrl+B'.",
   "speedrunapi.config.extra-options.option.audioDevice": "Device",
+  "speedrunapi.config.extra-options.option.autoDetectDevices": "Auto-Detect Devices",
+  "speedrunapi.config.extra-options.option.autoDetectDevices.description": "Automatically change output device if using default or if preferred device becomes available.",
   "options.audioDevice.default": "System Default"
 }
