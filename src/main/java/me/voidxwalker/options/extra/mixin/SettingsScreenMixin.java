@@ -2,7 +2,7 @@ package me.voidxwalker.options.extra.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.voidxwalker.options.extra.screen.AccessibilityOptionsScreen;
-import net.minecraft.client.gui.screen.*;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.options.OptionsScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.options.GameOptions;
@@ -18,7 +18,7 @@ public abstract class SettingsScreenMixin extends Screen {
     @SuppressWarnings("unchecked")
     @Inject(method = "init", at = @At("TAIL"))
     private void addAccessibilitySettingsButton(CallbackInfo ci) {
-        this.buttons.add(new ButtonWidget(106, this.width / 2 - 100, this.height / 6 + 96 - 24 - 6, "Accessibility Settings..."));
+        this.buttons.add(new ButtonWidget(106, this.width / 2 - 100, this.height / 6 + 96 - 24 + 12, "Accessibility Settings..."));
     }
 
     @ModifyExpressionValue(method = "buttonClicked", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/widget/ButtonWidget;active:Z"))

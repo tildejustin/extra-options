@@ -2,7 +2,6 @@ package me.voidxwalker.options.extra;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.options.GameOptions;
-import net.minecraft.util.math.MathHelper;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
