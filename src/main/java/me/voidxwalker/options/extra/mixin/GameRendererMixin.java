@@ -10,11 +10,11 @@ import org.spongepowered.asm.mixin.injection.*;
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
     @Shadow
-    private Minecraft client;
+    private Minecraft minecraft;
 
-    @ModifyExpressionValue(method = "setupCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/ControllablePlayerEntity;field_4010:F", ordinal = 0))
+    @ModifyExpressionValue(method = "setupCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/client/entity/living/player/InputPlayerEntity;f_1502286:F", ordinal = 0))
     private float applyDistortionEffectScale(float original, float tickDelta, int anaglyphFilter) {
-        float addend = (this.client.playerEntity.field_3997 - this.client.playerEntity.field_4010) * tickDelta;
+        float addend = (this.minecraft.player.f_9870933 - this.minecraft.player.f_1502286) * tickDelta;
         return original * ExtraOptions.getDistortionEffectScale() * ExtraOptions.getDistortionEffectScale()
                 + (addend * ExtraOptions.getDistortionEffectScale() * ExtraOptions.getDistortionEffectScale() - addend);
     }

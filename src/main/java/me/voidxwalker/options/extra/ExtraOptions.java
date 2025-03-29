@@ -1,7 +1,7 @@
 package me.voidxwalker.options.extra;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.option.GameOption;
+import net.minecraft.client.options.GameOptions;
 import net.minecraft.util.math.MathHelper;
 
 import java.io.*;
@@ -10,10 +10,10 @@ import java.nio.file.*;
 
 public class ExtraOptions {
     private static final Path config = FabricLoader.getInstance().getConfigDir().resolve("extra-options.txt");
-    public static GameOption DISTORTION_EFFECT_SCALE;
-    public static GameOption FOV_EFFECT_SCALE;
-    public static GameOption CONTROL_BOW_FOV;
-    public static GameOption CONTROL_SUBMERGED_FOV;
+    public static GameOptions.Option DISTORTION_EFFECT_SCALE;
+    public static GameOptions.Option FOV_EFFECT_SCALE;
+    public static GameOptions.Option CONTROL_BOW_FOV;
+    public static GameOptions.Option CONTROL_SUBMERGED_FOV;
     public static boolean controlBowFov = false;
     public static boolean controlSubmergedFov = false;
     private static float distortionEffectScale = 1;
@@ -75,7 +75,7 @@ public class ExtraOptions {
     }
 
     public static void setDistortionEffectScale(float distortionEffectScale) {
-        ExtraOptions.distortionEffectScale = MathHelper.clamp(distortionEffectScale, 0, 1);
+        ExtraOptions.distortionEffectScale = MathHelperExt.clamp(distortionEffectScale, 0, 1);
     }
 
     public static float getFovEffectScale() {
@@ -83,6 +83,6 @@ public class ExtraOptions {
     }
 
     public static void setFovEffectScale(float fovEffectScale) {
-        ExtraOptions.fovEffectScale = MathHelper.clamp(fovEffectScale, 0, 1);
+        ExtraOptions.fovEffectScale = MathHelperExt.clamp(fovEffectScale, 0, 1);
     }
 }

@@ -1,25 +1,33 @@
 package me.voidxwalker.options.extra.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.voidxwalker.options.extra.screen.AccessibilityOptionsScreen;
 import net.minecraft.client.gui.screen.*;
-import net.minecraft.client.option.GameOptions;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.client.gui.screen.options.OptionsScreen;
+import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.options.GameOptions;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(SettingsScreen.class)
-public abstract class SettingsScreenMixin {
+@Mixin(OptionsScreen.class)
+public abstract class SettingsScreenMixin extends Screen {
     @Shadow
-    @Final
     private GameOptions options;
 
-    @ModifyArg(method = "init", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/ButtonWidget;<init>(IIIIILjava/lang/String;)V", ordinal = 0), slice = @Slice(from = @At(value = "CONSTANT", args = "stringValue=options.snooper.view")))
-    private String renameSnooperOption(String name) {
-        return "Accessibility Settings...";
+    @SuppressWarnings("unchecked")
+    @Inject(method = "init", at = @At("TAIL"))
+    private void addAccessibilitySettingsButton(CallbackInfo ci) {
+        this.buttons.add(new ButtonWidget(106, this.width / 2 - 100, this.height / 6 + 96 - 24 - 6, "Accessibility Settings..."));
     }
 
-    @ModifyArg(method = "buttonClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;openScreen(Lnet/minecraft/client/gui/screen/Screen;)V", ordinal = 0), slice = @Slice(from = @At(value = "CONSTANT", args = "intValue=104")))
-    private Screen openAccessibilityScreen(@Nullable Screen screen) {
-        return new AccessibilityOptionsScreen((Screen) (Object) this, this.options);
+    @ModifyExpressionValue(method = "buttonClicked", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/widget/ButtonWidget;active:Z"))
+    private boolean openAccessibilityScreen(boolean original, ButtonWidget button) {
+        if (original) {
+            if (button.id == 106) {
+                this.minecraft.openScreen(new AccessibilityOptionsScreen(this, this.options));
+            }
+        }
+        return original;
     }
 }

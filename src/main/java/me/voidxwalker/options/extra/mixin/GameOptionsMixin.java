@@ -1,7 +1,7 @@
 package me.voidxwalker.options.extra.mixin;
 
 import me.voidxwalker.options.extra.ExtraOptions;
-import net.minecraft.client.option.*;
+import net.minecraft.client.options.GameOptions;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
@@ -15,8 +15,8 @@ public abstract class GameOptionsMixin {
         ExtraOptions.save();
     }
 
-    @Inject(method = "setOption(Lnet/minecraft/client/option/GameOption;F)V", at = @At("TAIL"))
-    private void setSliderOptions(GameOption option, float value, CallbackInfo ci) {
+    @Inject(method = "setValue(Lnet/minecraft/client/options/GameOptions$Option;F)V ", at = @At("TAIL"))
+    private void setSliderOptions(GameOptions.Option option, float value, CallbackInfo ci) {
         if (option == ExtraOptions.DISTORTION_EFFECT_SCALE) {
             ExtraOptions.setDistortionEffectScale(value);
         }
@@ -25,8 +25,8 @@ public abstract class GameOptionsMixin {
         }
     }
 
-    @Inject(method = "getFLoatOption", at = @At(value = "HEAD"), cancellable = true)
-    private void getSliderOptions(GameOption option, CallbackInfoReturnable<Float> cir) {
+    @Inject(method = "getValueFloat", at = @At(value = "HEAD"), cancellable = true)
+    private void getSliderOptions(GameOptions.Option option, CallbackInfoReturnable<Float> cir) {
         if (option == ExtraOptions.DISTORTION_EFFECT_SCALE) {
             cir.setReturnValue(ExtraOptions.getDistortionEffectScale());
         }
@@ -35,8 +35,8 @@ public abstract class GameOptionsMixin {
         }
     }
 
-    @Inject(method = "setOption(Lnet/minecraft/client/option/GameOption;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/GameOptions;save()V"))
-    private void setBooleanOptions(GameOption option, int integer, CallbackInfo ci) {
+    @Inject(method = "setValue(Lnet/minecraft/client/options/GameOptions$Option;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/options/GameOptions;save()V"))
+    private void setBooleanOptions(GameOptions.Option option, int integer, CallbackInfo ci) {
         if (option == ExtraOptions.CONTROL_BOW_FOV) {
             ExtraOptions.controlBowFov = !ExtraOptions.controlBowFov;
         }
@@ -45,8 +45,8 @@ public abstract class GameOptionsMixin {
         }
     }
 
-    @Inject(method = "gteIntOption", at = @At("HEAD"), cancellable = true)
-    private void getBooleanOptions(GameOption option, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "getValueBool", at = @At("HEAD"), cancellable = true)
+    private void getBooleanOptions(GameOptions.Option option, CallbackInfoReturnable<Boolean> cir) {
         if (option == ExtraOptions.CONTROL_BOW_FOV) {
             cir.setReturnValue(ExtraOptions.controlBowFov);
         }
