@@ -18,8 +18,6 @@ public class ExtraOptions implements SpeedrunConfig {
 
     public static boolean controlSubmergedFov = false;
 
-    public static boolean narratorHotkey = true;
-
     @SuppressWarnings("unused")
     private Text getPercentText(float value) {
         return value == 0 ? ScreenTexts.OFF : new LiteralText((int) (value * 100) + "%");
