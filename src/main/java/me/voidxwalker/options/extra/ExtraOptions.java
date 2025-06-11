@@ -1,9 +1,9 @@
 package me.voidxwalker.options.extra;
 
+import me.contaria.speedrunapi.config.api.SpeedrunConfig;
+import me.contaria.speedrunapi.config.api.annotations.Config;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.text.*;
-import org.mcsr.speedrunapi.config.api.SpeedrunConfig;
-import org.mcsr.speedrunapi.config.api.annotations.Config;
 
 public class ExtraOptions implements SpeedrunConfig {
     @Config.Numbers.Fractional.Bounds(max = 1)
@@ -28,5 +28,10 @@ public class ExtraOptions implements SpeedrunConfig {
     @Override
     public String modID() {
         return "extra-options";
+    }
+
+    @Override
+    public boolean shouldParseStaticFields() {
+        return true;
     }
 }
