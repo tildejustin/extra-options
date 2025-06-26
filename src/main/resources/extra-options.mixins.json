@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_8",
   "client": [
     "AbstractClientPlayerEntityMixin",
-    "GameRendererMixin"
+    "GameRendererMixin",
+    "NarratorManagerMixin",
+    "accessor.NarratorManagerAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
