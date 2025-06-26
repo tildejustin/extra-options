@@ -5,7 +5,12 @@
   "compatibilityLevel": "JAVA_8",
   "client": [
     "AbstractClientPlayerEntityMixin",
+    "AccessibilityOptionsScreenMixin",
     "GameRendererMixin"
+  ],
+  "mixins": [
+    "EnderEyeItemMixin",
+    "ServerPlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
