@@ -12,6 +12,7 @@ public class ExtraOptions implements SpeedrunConfig {
 
     @Config.Numbers.Fractional.Bounds(max = 1)
     @Config.Text(getter = "getPercentText")
+    @Config.Access(getter = "getSquared", setter = "setSqrt")
     public float fovEffectScale = 1;
 
     public boolean controlBowFov = false;
@@ -27,6 +28,16 @@ public class ExtraOptions implements SpeedrunConfig {
     @SuppressWarnings("unused")
     private Text getPercentText(float value) {
         return value == 0 ? ScreenTexts.OFF : new LiteralText((int) (value * 100) + "%");
+    }
+
+    @SuppressWarnings("unused")
+    private float getSquared() {
+        return (float) Math.pow(ExtraOptions.config.fovEffectScale, 2);
+    }
+
+    @SuppressWarnings("unused")
+    private void setSqrt(float fovEffectScale) {
+        ExtraOptions.config.fovEffectScale = (float) Math.sqrt(fovEffectScale);
     }
 
     @Override
