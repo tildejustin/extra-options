@@ -1,14 +1,14 @@
 [versions]
-minecraft = "1.16.1"
-yarn_mappings = "1.16.1-build.28"
+minecraft = "1.15.2"
+yarn_mappings = "1.15.2+build.17"
 fabric_loader = "0.16.14"
 loom = "1.10-SNAPSHOT"
 # https://jitpack.io/#kingcontaria/speedrunapi
-speedrunapi = "96811e85e8"
+speedrunapi = "45fa51d142"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
-yarn_mappings = { module = "dev.tildejustin:yarn", version.ref = "yarn_mappings" }
+yarn_mappings = { module = "net.fabricmc:yarn", version.ref = "yarn_mappings" }
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
 speedrunapi = { module = "com.github.contariaa:speedrunapi", version.ref = "speedrunapi" }
 

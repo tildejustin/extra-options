@@ -31,9 +31,9 @@
     "extra-options.mixins.json"
   ],
   "depends": {
-    "minecraft": ">1.15.2 <1.16.2",
+    "minecraft": "1.15.2",
     "fabricloader": ">=0.15",
-    "speedrunapi": ">=2.0"
+    "speedrunapi": ">=2.0-"
   },
   "custom": {
     "speedrunapi": {

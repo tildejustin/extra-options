@@ -2,8 +2,7 @@ package me.voidxwalker.options.extra;
 
 import me.contaria.speedrunapi.config.api.SpeedrunConfig;
 import me.contaria.speedrunapi.config.api.annotations.Config;
-import net.minecraft.client.gui.screen.ScreenTexts;
-import net.minecraft.text.*;
+import net.minecraft.client.resource.language.I18n;
 
 public class ExtraOptions implements SpeedrunConfig {
     @Config.Numbers.Fractional.Bounds(max = 1)
@@ -26,8 +25,8 @@ public class ExtraOptions implements SpeedrunConfig {
     }
 
     @SuppressWarnings("unused")
-    private Text getPercentText(float value) {
-        return value == 0 ? ScreenTexts.OFF : new LiteralText((int) (value * 100) + "%");
+    private String getPercentText(float value) {
+        return value == 0 ? I18n.translate("options.off") : (int) (value * 100) + "%";
     }
 
     @SuppressWarnings("unused")
