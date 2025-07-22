@@ -2,6 +2,7 @@ package me.voidxwalker.options.extra.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import me.voidxwalker.options.extra.screen.AccessibilityOptionsScreen;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.options.OptionsScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -15,10 +16,14 @@ public abstract class SettingsScreenMixin extends Screen {
     @Shadow
     private GameOptions options;
 
+    @Unique
+    private final int offset = FabricLoader.getInstance().getModContainer("minecraft").get().getMetadata().getVersion().getFriendlyString().equals("1.0.0") ? 12 : -3;
+
     @SuppressWarnings("unchecked")
     @Inject(method = "init", at = @At("TAIL"))
     private void addAccessibilitySettingsButton(CallbackInfo ci) {
-        this.buttons.add(new ButtonWidget(106, this.width / 2 - 100, this.height / 6 + 96 - 24 + 12, "Accessibility Settings..."));
+        // not particularly pretty but at least it's not overlapping with anything
+        this.buttons.add(new ButtonWidget(106, this.width / 2 - 100, this.height / 6 + 96 - 24 + offset, "Accessibility Settings..."));
     }
 
     @ModifyExpressionValue(method = "buttonClicked", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/widget/ButtonWidget;active:Z"))
