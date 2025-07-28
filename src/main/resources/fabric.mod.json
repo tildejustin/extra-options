@@ -31,7 +31,10 @@
     "extra-options.mixins.json"
   ],
   "depends": {
-    "minecraft": "1.15.2",
+    "minecraft": [
+      "1.15.2",
+      "1.16-alpha.20.13.inf"
+    ],
     "fabricloader": ">=0.15",
     "speedrunapi": ">=2.0-"
   },
